@@ -61,7 +61,8 @@ const startHour = 13;
         }
       </div>
 
-      <div class="pointer-events-none absolute inset-y-0 right-0 left-[4.6rem] sm:left-[6rem]">
+      <!-- Offsets match the label column plus the grid gap, so the playhead lines up with the bars. -->
+      <div class="pointer-events-none absolute inset-y-0 right-0 left-[5.1rem] sm:left-[6.75rem]">
         <div class="relative h-full">
           <div
             data-playhead
@@ -74,7 +75,7 @@ const startHour = 13;
     </div>
 
     <div class="mt-3 grid grid-cols-[4.6rem_1fr] gap-2 sm:grid-cols-[6rem_1fr] sm:gap-3">
-      <span></span>
+      <span aria-hidden="true"></span>
       <div>
         <input
           type="range"

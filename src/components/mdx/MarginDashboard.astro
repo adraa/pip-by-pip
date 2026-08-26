@@ -128,9 +128,16 @@ const rows = [
         <div class="absolute inset-y-0 w-px bg-flag/70" style="left:25%" aria-hidden="true"></div>
       </div>
 
-      <div class="relative mt-1 h-4 font-sans text-[0.68rem] text-ink-faint">
-        <span class="absolute -translate-x-1/2" style="left:12.5%">50% stop out</span>
-        <span class="absolute -translate-x-1/2" style="left:25%">100% margin call</span>
+      <div class="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-sans text-[0.7rem] text-ink-faint">
+        <span class="flex items-center gap-1.5">
+          <span class="inline-block h-3 w-px bg-fall/70" aria-hidden="true"></span>
+          50% stop out
+        </span>
+        <span class="flex items-center gap-1.5">
+          <span class="inline-block h-3 w-px bg-flag/70" aria-hidden="true"></span>
+          100% margin call
+        </span>
+        <span class="ml-auto">scale ends at 400%</span>
       </div>
 
       <p data-verdict class="mt-4 rounded-lg bg-accent-soft px-4 py-3 font-sans text-[0.85rem] leading-relaxed text-accent-ink">
