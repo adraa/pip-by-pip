@@ -1,0 +1,99 @@
+---
+oneThing: Margin level is your equity as a percentage of your used margin, and it is the single number your broker judges you by.
+minutes: 4
+terms:
+  - term: Margin level
+    plain: Equity divided by used margin, as a percentage. Higher is safer.
+  - term: 100% margin level
+    plain: The point where equity has fallen to exactly the locked margin. Usually the margin call.
+  - term: 50% margin level
+    plain: A common stop out point, where the broker closes trades for you.
+quiz:
+  - question: How is margin level calculated?
+    choices:
+      - Used margin divided by equity
+      - Equity divided by used margin, times 100
+      - Balance divided by leverage
+      - Free margin divided by balance
+    answer: 1
+    because: Equity divided by used margin, expressed as a percentage. Equity is on top because it is the money that can absorb losses.
+  - question: Equity $1,000, used margin $500. What is the margin level?
+    choices:
+      - 50%
+      - 100%
+      - 200%
+      - 500%
+    answer: 2
+    because: 1,000 divided by 500 is 2, so 200%. You have twice as much equity as locked margin.
+  - question: Is a higher margin level safer or riskier?
+    choices:
+      - Riskier
+      - Safer
+      - Neither, it is unrelated to risk
+      - It depends on the pair
+    answer: 1
+    because: A high margin level means a lot of equity relative to what is locked, so the market has plenty of room to move before you are in trouble.
+  - question: What is the margin level with no trades open?
+    choices:
+      - 0%
+      - 100%
+      - Infinite, and usually shown as a dash
+      - It cannot be calculated
+    answer: 2
+    because: Dividing by zero used margin gives no meaningful figure, so platforms show a dash or nothing at all.
+---
+
+This is the number that decides whether your positions stay open. It is worth understanding properly.
+
+<Formula expression="Margin level = (Equity ÷ Used margin) × 100" note="Higher is safer. Falling toward 100% is trouble." />
+
+## Reading it
+
+<Worked title="The same used margin, three situations">
+Used margin is **$500** throughout.
+
+**Equity $2,500:** margin level **500%**. Very comfortable.
+**Equity $1,000:** margin level **200%**. Fine.
+**Equity $500:** margin level **100%**. Margin call. Your equity has fallen to exactly the locked margin.
+**Equity $250:** margin level **50%**. Stop out. The broker closes your trades.
+</Worked>
+
+<Analogy>
+Think of it as the fuel gauge, not the fuel tank.
+
+Used margin is how far you have to drive. Equity is how much fuel you have. Margin level is the ratio of the two: how comfortably you can complete the journey.
+
+At 100% you have exactly enough and no room for a detour. At 50% you are already coasting.
+</Analogy>
+
+## The two lines to know
+
+Almost every broker sets two thresholds:
+
+- **Margin call level**, commonly **100%**. A warning. No new trades allowed, and often an email or an alert.
+- **Stop out level**, commonly **50%**. The broker begins closing your positions, whether you like it or not.
+
+Both numbers vary between brokers, which is a lesson of its own further along. Check yours.
+
+<Callout kind="warning" title="Nobody asks your permission">
+At the stop out level your broker closes your trades automatically. There is no phone call, no confirmation, no chance to explain that it is about to turn around.
+
+They are protecting themselves from your account going negative and owing them money. That is the entire arrangement, and you agreed to it when you opened the account.
+</Callout>
+
+## Watch it fall
+
+The meter here is exactly what your broker is looking at. Drag the price move slider left and watch the number cross the two lines.
+
+<MarginDashboard balance={1000} leverage={100} lots={0.5} move={0} caption="Green through amber to red. The two vertical marks are the margin call at 100% and the stop out at 50%." />
+
+## Keeping it high
+
+There are only two ways to raise your margin level, and one of them is not available in a crisis.
+
+1. **Increase equity** — deposit more money, or have your trades move in your favour.
+2. **Reduce used margin** — close a position, which frees its deposit.
+
+<Callout>
+Notice that when your account is in trouble, depositing more is the emotional choice and closing a position is the sane one. Traders who deposit into a losing position are not solving the problem. They are buying it more time to get worse.
+</Callout>

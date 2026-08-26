@@ -1,0 +1,84 @@
+---
+oneThing: Equity is what your account would actually be worth if you closed everything this second, and it is the number that matters.
+minutes: 3
+terms:
+  - term: Equity
+    plain: Balance plus the profit or loss on all open trades. Your account's live value.
+  - term: Balance
+    plain: Only closed business. It ignores open trades entirely.
+  - term: Live value
+    plain: What you would walk away with if you closed everything right now.
+quiz:
+  - question: How is equity calculated?
+    choices:
+      - Balance minus used margin
+      - Balance plus floating profit or loss
+      - Deposits minus withdrawals
+      - Used margin plus free margin
+    answer: 1
+    because: Equity is your balance adjusted for every open trade, which makes it your account's true current value.
+  - question: Balance $2,000, open trades showing minus $400. What is equity?
+    choices:
+      - $2,400
+      - $2,000
+      - $1,600
+      - $400
+    answer: 2
+    because: 2,000 minus 400 is 1,600. That is what you would have left if you closed everything now.
+  - question: When are balance and equity the same?
+    choices:
+      - Never
+      - When you have no open trades
+      - Only on Mondays
+      - When you are in profit
+    answer: 1
+    because: With nothing open there is no floating profit or loss, so the two figures are identical.
+  - question: Which number does your broker use to decide whether to close you out?
+    choices:
+      - Balance
+      - Equity
+      - Deposits
+      - Used margin only
+    answer: 1
+    because: Margin level is calculated from equity. Your balance is irrelevant to a margin call.
+---
+
+If you only ever watch one number on your platform, watch this one.
+
+<Formula expression="Equity = Balance + Floating P/L" note="What you would actually have if you closed every position right now." />
+
+## Balance versus equity
+
+<Worked title="The same account, described two ways">
+You deposited **$2,000**. You have two trades open, showing **minus $400** in total.
+
+**Balance: $2,000.** Nothing has closed, so nothing has changed.
+
+**Equity: $1,600.** That is what you would walk away with if you closed both trades this second.
+
+Which number is the truth about your account?
+</Worked>
+
+Equity, obviously. Balance is a historical record. Equity is now.
+
+<Callout kind="warning" title="This is why people are surprised">
+A trader watching the balance sees $2,000 and feels fine. The broker is watching equity, sees $1,600, and is already counting down to closing the positions.
+
+Every margin call calculation in the next four lessons uses equity. Balance never appears in any of them.
+</Callout>
+
+## Watch it breathe
+
+Equity moves every second the market moves, because floating P/L is inside it. Drag the price slider and watch equity respond while balance sits perfectly still.
+
+<MarginDashboard balance={2000} leverage={100} lots={0.3} move={0} caption="Balance never moves. Equity moves constantly. Only one of them is the truth." />
+
+## The three-second sanity check
+
+Before you close your laptop for the night, ask:
+
+1. What is my equity?
+2. What is my used margin?
+3. How far can the market move before those two collide?
+
+If you cannot answer the third, your position is too big. That collision has a name, **margin level**, and it is the next lesson.

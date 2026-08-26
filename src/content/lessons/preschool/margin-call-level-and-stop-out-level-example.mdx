@@ -1,0 +1,117 @@
+---
+oneThing: With a 100% call and a 50% stop out, there is a warning zone between the alarm and the closure, and what you do in it decides everything.
+minutes: 5
+terms:
+  - term: Warning zone
+    plain: The stretch between the margin call level and the stop out level, where you still control the outcome.
+  - term: Partial close
+    plain: Closing part of a position to free margin while keeping some exposure.
+quiz:
+  - question: What is the warning zone?
+    choices:
+      - The first hour of trading
+      - The gap between the margin call level and the stop out level
+      - The time before a news release
+      - The spread
+    answer: 1
+    because: Between 100% and 50% you are warned but not yet closed. It is the only stretch where the decision is still yours.
+  - question: In the worked example, at what price did the margin call trigger?
+    choices:
+      - '1.0750'
+      - '1.0250'
+      - '0.9959'
+      - '0.9905'
+    answer: 2
+    because: The margin call fired at a margin level of 100%, when equity had fallen to the used margin of $108.50.
+  - question: What is the fastest way to raise your margin level in the warning zone?
+    choices:
+      - Open another trade
+      - Close a position, which frees its margin and stops the bleeding
+      - Increase your leverage
+      - Wait for the price to recover
+    answer: 1
+    because: Closing reduces used margin and stops further floating losses. It is the only action fully within your control.
+  - question: Why do many traders lose the whole account despite the warning?
+    choices:
+      - The warning is not sent
+      - They use the zone to hope rather than to act
+      - Brokers ignore the rule
+      - The zone is too short to matter
+    answer: 1
+    because: The zone gives room to act, and the natural response to a big floating loss is to wait for a recovery. Waiting uses the zone up.
+---
+
+This is the more common arrangement, and the more forgiving one. Same trade as the last lesson, different broker settings.
+
+## The setup
+
+<Worked title="The account">
+Deposit: **$1,000**
+Leverage: **100:1**
+Broker: margin call at **100%**, stop out at **50%**.
+
+Trade: buy **1 mini lot** of EUR/USD at **1.0850**. One pip is **$1**.
+Required margin: **$108.50**
+</Worked>
+
+## Two alarms, not one
+
+| Price | Pips against | Equity | Margin level | What happens |
+| --- | --- | --- | --- | --- |
+| 1.0850 | 0 | $1,000.00 | 922% | Nothing |
+| 1.0550 | -300 | $700.00 | 645% | Nothing |
+| 1.0250 | -600 | $400.00 | 369% | Getting thin |
+| 0.9959 | -891 | $109.00 | 100% | **Margin call.** Warning, no new trades |
+| 0.9905 | -945 | $55.00 | 51% | Almost gone |
+| 0.9904 | -946 | $54.25 | 50% | **Stop out.** Position closed |
+
+## The zone between them
+
+Look at the gap: from 0.9959 down to 0.9904. **Fifty-four pips.**
+
+That is your warning zone. Fifty-four pips of market movement during which you are told there is a problem and still have the power to fix it.
+
+<Callout title="What the zone is actually for">
+It exists so you can act. Close the trade, close part of it, or add funds. Any of those raises the margin level and ends the emergency.
+</Callout>
+
+## What people actually do with it
+
+<TwoUp
+  left={{
+    title: 'What the zone is for',
+    tone: 'good',
+    points: [
+      'Close the position and take the loss',
+      'Close part of it, freeing margin and reducing exposure',
+      'Deposit funds, if the trade genuinely still makes sense',
+      'Any of these ends the situation',
+    ],
+  }}
+  right={{
+    title: 'What usually happens',
+    tone: 'bad',
+    points: [
+      'Stare at the screen',
+      'Reason that a 946 pip move must be nearly over',
+      'Decide to give it "a bit more room"',
+      'Get stopped out anyway, 54 pips later',
+    ],
+  }}
+/>
+
+<Callout kind="warning" title="The honest reason the zone gets wasted">
+By the time you are in it, closing means admitting a loss of nearly your entire account. Almost nobody chooses that voluntarily. So they wait, and the choice is taken from them.
+
+The zone is not really a second chance. It is a last chance to do the thing you should have done six hundred pips earlier.
+</Callout>
+
+## The point of both examples
+
+Two lessons, two broker setups, and the same conclusion: **a position sized so that a normal market move can reach your stop out is not a trade, it is a countdown.**
+
+Watch it happen once more, at your own pace. Set the size to 1 lot on a $1,000 account and drag the price move slider left slowly.
+
+<MarginDashboard balance={1000} leverage={100} lots={1} move={0} caption="Green to amber to red. The whole margin section, in one slider." />
+
+Undergraduate Senior teaches how to size a trade so this never comes up. Everything before then is just learning why it matters.

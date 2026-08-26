@@ -1,0 +1,100 @@
+---
+oneThing: When the margin call and the stop out are the same level, the warning and the closure arrive together.
+minutes: 5
+terms:
+  - term: Combined level
+    plain: A broker setup where the margin call and stop out are the same percentage, usually 100%.
+  - term: Realised loss
+    plain: The loss that becomes permanent when a position is closed.
+quiz:
+  - question: In this setup, what happens at a margin level of 100%?
+    choices:
+      - You receive a warning only
+      - Your positions are closed immediately
+      - Nothing until 50%
+      - Your broker deposits funds for you
+    answer: 1
+    because: With no separate stop out level, hitting 100% triggers the closure straight away. Warning and action are the same moment.
+  - question: Why is this setup arguably harsher?
+    choices:
+      - The spread is wider
+      - There is no gap between the warning and the closure in which to react
+      - Leverage is lower
+      - It only applies to large accounts
+    answer: 1
+    because: A broker with a 100% call and a 50% stop out gives you a whole zone to fix things. This one gives you none.
+  - question: In the worked example, what ended the trade?
+    choices:
+      - A take profit order
+      - The trader closing manually
+      - The margin level reaching 100%
+      - The market closing
+    answer: 2
+    because: The trade was force-closed the instant equity fell to equal the used margin.
+  - question: What would have prevented it?
+    choices:
+      - More leverage
+      - A smaller position, or a stop loss well above the stop out point
+      - Depositing after the call
+      - Opening a second trade
+    answer: 1
+    because: The account failed because the position was too large for it. A smaller size, or a stop loss that triggers first, keeps the decision yours.
+---
+
+Some brokers set the margin call and the stop out at the same number, typically 100%. This lesson walks through exactly what that feels like, minute by minute.
+
+## The setup
+
+<Worked title="The account">
+Deposit: **$1,000**
+Leverage: **100:1**
+Broker: margin call level **100%**, no separate stop out. Closure happens at 100%.
+
+The trade: buy **1 mini lot** of EUR/USD at **1.0850**. One pip is worth **$1**.
+
+Required margin = $10,850 ÷ 100 = **$108.50**
+</Worked>
+
+## As the price falls
+
+| Price | Pips against | Floating P/L | Equity | Margin level | Status |
+| --- | --- | --- | --- | --- | --- |
+| 1.0850 | 0 | $0 | $1,000.00 | 922% | Comfortable |
+| 1.0750 | -100 | -$100 | $900.00 | 830% | Fine |
+| 1.0550 | -300 | -$300 | $700.00 | 645% | Uncomfortable |
+| 1.0250 | -600 | -$600 | $400.00 | 369% | Worrying |
+| 0.9959 | -891 | -$891 | $109.00 | 100% | **Closed** |
+
+The trade survives an enormous 891 pip move, then ends abruptly.
+
+<Callout>
+Notice what killed it. Not a chart pattern, not bad analysis. It ran out of equity relative to the locked margin. The price only had to keep going.
+</Callout>
+
+## The bit that stings
+
+At the moment of closure your equity is **$109**. You deposited $1,000. You have lost **89% of your account on a single trade**, and you never made a decision about it. The system did.
+
+## The same thing with a stop loss
+
+<Worked title="One line of difference">
+Identical account, identical trade, but with a stop loss at **1.0750**, 100 pips away.
+
+The price falls. At 1.0750 the stop triggers and the trade closes.
+
+Loss: **$100**. Remaining balance: **$900**. Margin level: back to infinity, because nothing is open.
+
+You are down 10% and entirely intact. You get to trade tomorrow, and the day after.
+</Worked>
+
+The difference between losing 10% and losing 89% was one order, placed at the beginning, when you were calm.
+
+## Why this setup is the harsher one
+
+<Callout kind="warning">
+A broker with a 100% margin call and a separate 50% stop out gives you a zone: a warning, then some room, then the closure. You can act in between.
+
+A broker with them combined gives you nothing. The warning and the execution are the same event.
+</Callout>
+
+Neither arrangement is wrong, and both are common. Find out which one you have **before** you need to know, because the difference decides how much warning you get.

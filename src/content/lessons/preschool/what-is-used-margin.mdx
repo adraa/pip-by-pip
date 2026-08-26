@@ -1,0 +1,91 @@
+---
+oneThing: Used margin is every open trade's deposit added together, and it is money that cannot protect you while it is locked.
+minutes: 3
+terms:
+  - term: Used margin
+    plain: The total of all required margins on your open positions.
+  - term: Required margin
+    plain: The deposit for one individual trade.
+  - term: Locked up
+    plain: Held aside by the broker. Still yours, but unavailable.
+quiz:
+  - question: What is used margin?
+    choices:
+      - Margin you have spent
+      - The total deposit locked across all open trades
+      - The fee for using leverage
+      - Your account balance
+    answer: 1
+    because: Add up the required margin of every open position and that total is your used margin.
+  - question: You have three trades needing $100, $250 and $150. What is used margin?
+    choices:
+      - $250
+      - $400
+      - $500
+      - $150
+    answer: 2
+    because: They simply add up. 100 plus 250 plus 150 is 500.
+  - question: What happens to used margin when you close one trade?
+    choices:
+      - It stays the same
+      - It falls by that trade's required margin
+      - It doubles
+      - It becomes profit
+    answer: 1
+    because: Closing a trade releases its deposit, so used margin drops by exactly that amount and free margin rises.
+  - question: Why does high used margin make an account fragile?
+    choices:
+      - It increases the spread
+      - Less equity is free to absorb losses, so a smaller move triggers a margin call
+      - The broker charges interest on it
+      - It reduces your leverage
+    answer: 1
+    because: Margin that is locked cannot cushion a losing trade. The more that is tied up, the smaller the move needed to put you in trouble.
+---
+
+Used margin is the least complicated number in this section. Add up the deposit on every open trade.
+
+<Formula expression="Used margin = Sum of required margin on all open positions" />
+
+<Worked title="Three trades open at once">
+Leverage 100:1, account in dollars.
+
+| Trade | Size | Required margin |
+| --- | --- | --- |
+| EUR/USD long | 1 mini lot | $108 |
+| GBP/USD short | 2 mini lots | $253 |
+| USD/JPY long | 1 mini lot | $100 |
+
+**Used margin: $461.**
+
+Close the GBP/USD trade and used margin drops immediately to **$208**. The $253 is released back to you the moment the position is gone.
+</Worked>
+
+## Why it matters
+
+Used margin is not a cost. It is still your money. But while it is locked up, **it cannot do the one job that keeps you alive: absorbing losses.**
+
+<Analogy>
+You have 10,000 rupees in your wallet, but 8,000 of it is a security deposit you have promised to a landlord and cannot touch.
+
+You are not poor, exactly. But you can only handle a 2,000 rupee emergency, and the moment something bigger happens you are in trouble, despite the 10,000 on paper.
+</Analogy>
+
+Use the sliders to watch this directly. Push the trade size up and notice used margin climbing while free margin shrinks toward nothing.
+
+<MarginDashboard balance={2000} leverage={100} lots={0.5} move={0} caption="Increase the trade size with no price movement at all. Used margin rises, free margin falls, and the account gets more fragile without a single pip going against you." />
+
+<Callout kind="warning" title="The overtrading trap">
+Opening several positions at once feels like diversification. Often it is not: EUR/USD, GBP/USD and AUD/USD all long is essentially one big bet against the dollar, in three pieces.
+
+You have tripled the locked margin and taken on one concentrated risk. That is the worst of both.
+</Callout>
+
+## The two numbers it feeds
+
+Used margin is one half of the two figures that decide everything:
+
+- **Free margin** = Equity − Used margin
+- **Margin level** = (Equity ÷ Used margin) × 100
+
+Both are coming next.

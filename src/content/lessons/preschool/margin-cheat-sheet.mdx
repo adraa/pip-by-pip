@@ -1,0 +1,96 @@
+---
+oneThing: Every margin term on one page, with the formulas, in the order they connect.
+minutes: 3
+terms:
+  - term: The chain
+    plain: Balance leads to equity, equity leads to free margin, free margin leads to margin level.
+quiz:
+  - question: Which is the live value of your account?
+    choices:
+      - Balance
+      - Equity
+      - Used margin
+      - Free margin
+    answer: 1
+    because: Equity is balance plus floating profit and loss, so it is what the account is worth right now.
+  - question: What is free margin?
+    choices:
+      - Equity minus used margin
+      - Balance minus used margin
+      - Equity plus used margin
+      - Margin with no fee
+    answer: 0
+    because: It starts from equity, which already includes open trades, and subtracts what is locked.
+  - question: Margin level is calculated as what?
+    choices:
+      - Used margin divided by equity
+      - Equity divided by used margin, as a percentage
+      - Balance divided by leverage
+      - Free margin divided by equity
+    answer: 1
+    because: Equity over used margin, times 100. Higher is safer.
+  - question: Which figure does a margin call watch?
+    choices:
+      - Balance
+      - Equity, via the margin level
+      - Deposits
+      - Leverage
+    answer: 1
+    because: The margin level is built from equity, so a margin call is triggered by equity falling, not by the balance.
+---
+
+Everything from this section, on one page. This is the lesson to come back to.
+
+## The formulas
+
+<Formula expression="Required margin = Position size ÷ Leverage" />
+<Formula expression="Used margin = Sum of required margin on all open trades" />
+<Formula expression="Equity = Balance + Floating P/L" />
+<Formula expression="Free margin = Equity − Used margin" />
+<Formula expression="Margin level = (Equity ÷ Used margin) × 100" />
+
+## The words
+
+| Term | Plain meaning | Changes when |
+| --- | --- | --- |
+| **Balance** | Deposits, withdrawals and closed trades. Ignores open ones. | A trade closes, or you move money |
+| **Floating P/L** | Profit or loss on open trades. Not yours yet. | Every tick |
+| **Equity** | Balance plus floating P/L. The live value. | Every tick |
+| **Required margin** | The deposit for one trade | You open or close that trade |
+| **Used margin** | All required margins added up | You open or close anything |
+| **Free margin** | Equity minus used margin. Your cushion. | Every tick, and on every open or close |
+| **Margin level** | Equity as a % of used margin | Every tick |
+| **Margin call level** | Where the broker warns you. Often 100%. | Set by the broker |
+| **Stop out level** | Where the broker closes you. Often 50%. | Set by the broker |
+
+## The chain
+
+<Steps
+  steps={[
+    { title: 'You deposit', body: 'Balance is set. Equity equals balance, because nothing is open.' },
+    { title: 'You open a trade', body: 'Required margin is locked. Used margin rises, free margin falls. Balance does not move.' },
+    { title: 'The price moves', body: 'Floating P/L changes, so equity changes, so free margin and margin level change. Balance still does not move.' },
+    { title: 'Margin level falls to the call level', body: 'Warning. No new trades. You can still act.' },
+    { title: 'Margin level falls to the stop out', body: 'The broker closes positions for you, largest loser first, until the level recovers.' },
+    { title: 'The trade closes', body: 'Margin is released, the loss or gain becomes real, and only now does the balance change.' },
+  ]}
+/>
+
+## The one-sentence version of each lesson
+
+- **Margin** is a deposit, not a fee, and you get it back.
+- **Balance** lies to you, because it ignores open trades.
+- **Equity** is the truth.
+- **Floating profit** is not money until you close.
+- **Used margin** is money that cannot protect you.
+- **Free margin** is your actual cushion.
+- **Margin level** is what the broker judges you by.
+- **Margin call** is the warning.
+- **Stop out** is not.
+- **Leverage** is the ceiling; **effective leverage** is your choice.
+
+<Callout>
+If you understand this page, you understand more about account mechanics than most people who have been trading for a year. The remaining lesson is the practical one: how to make sure none of this ever becomes relevant.
+</Callout>
+
+<MarginDashboard balance={1000} leverage={100} lots={0.2} move={0} caption="One last go. Every number on this page is in this panel." />

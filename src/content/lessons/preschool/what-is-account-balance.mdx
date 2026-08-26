@@ -1,0 +1,86 @@
+---
+oneThing: Your balance is the money in your account not counting open trades, and it only changes when a trade closes.
+minutes: 3
+terms:
+  - term: Balance
+    plain: Deposits, minus withdrawals, plus or minus all closed trades. Open trades are not included.
+  - term: Realised profit or loss
+    plain: The result of a trade that has been closed. It is final, and it moves your balance.
+  - term: Swap
+    plain: A small interest adjustment charged or paid for holding a trade overnight.
+quiz:
+  - question: What changes your account balance?
+    choices:
+      - Any price movement
+      - Closing a trade, depositing, or withdrawing
+      - Opening a trade
+      - The passage of time
+    answer: 1
+    because: Balance only records finished business. An open trade moving around does not touch it.
+  - question: You have $1,000 and an open trade showing minus $200. What is your balance?
+    choices:
+      - $800
+      - $1,000
+      - $1,200
+      - $0
+    answer: 1
+    because: The trade is still open, so the loss is floating and the balance is untouched. Close it and the balance becomes $800.
+  - question: Which figure does a margin call actually watch?
+    choices:
+      - Balance
+      - Equity
+      - Deposits
+      - Withdrawals
+    answer: 1
+    because: Equity includes open trades and is therefore the live figure. Balance can look perfectly healthy right up to the moment you are closed out.
+  - question: What is a swap?
+    choices:
+      - Exchanging one pair for another
+      - A small overnight interest adjustment on a held position
+      - A type of order
+      - A broker bonus
+    answer: 1
+    because: Holding overnight means holding two currencies with different interest rates, and the difference is credited or charged as a swap.
+---
+
+The simplest number on your platform, and the one that misleads people most often.
+
+<Formula expression="Balance = Deposits − Withdrawals + Closed trade results" note="Open trades are not in this formula at all." />
+
+## It only records finished business
+
+Your balance is a record of things that have **already happened**. Money you put in, money you took out, and the results of trades you have closed.
+
+An open trade, however large, however deep in profit or loss, is not part of it.
+
+<Worked title="Watching the balance sit still">
+You deposit **$1,000**. Balance: **$1,000**.
+
+You open a trade. Balance: still **$1,000**. Opening a trade does not spend anything; it only locks some margin aside.
+
+The trade goes 100 pips against you, showing minus $100 on screen. Balance: still **$1,000**.
+
+It recovers and shows plus $200. Balance: still **$1,000**.
+
+You close it at plus $150. Balance: **$1,150**. Only now.
+</Worked>
+
+## The trap
+
+This is exactly where beginners get caught out.
+
+<Callout kind="warning" title="A healthy balance means nothing">
+Your balance can read $1,000 while your account is minutes from being wiped out, because a $900 floating loss does not appear in it.
+
+The number that matters is **equity**, which counts the open trades. That is the next lesson but one, and it is the one to watch.
+</Callout>
+
+## The small print: swaps
+
+One thing does quietly change your balance without you closing anything: **swap**, sometimes called rollover.
+
+Hold a position past the daily rollover, usually 22:00 GMT, and you are holding one currency while owing another. The difference in their interest rates is credited or debited. It is usually pennies on a micro lot, and it accumulates on larger, longer trades.
+
+<Callout>
+Swaps are triple-charged on Wednesdays, to account for the weekend when the market is closed. If a trade suddenly costs three times as much to hold, that is why, and nothing has gone wrong.
+</Callout>

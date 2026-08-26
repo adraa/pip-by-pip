@@ -1,0 +1,106 @@
+---
+oneThing: Free margin is the part of your account still available to absorb losses or open new trades, and it is your real cushion.
+minutes: 3
+terms:
+  - term: Free margin
+    plain: Equity minus used margin. What is left over and available.
+  - term: Available margin
+    plain: Another name for the same thing on some platforms.
+  - term: Cushion
+    plain: How much the market can move against you before your broker steps in.
+quiz:
+  - question: How is free margin calculated?
+    choices:
+      - Balance minus used margin
+      - Equity minus used margin
+      - Equity plus used margin
+      - Balance plus floating P/L
+    answer: 1
+    because: Free margin starts from equity, which already includes floating profit and loss, and subtracts what is locked.
+  - question: Equity $1,500, used margin $500. What is free margin?
+    choices:
+      - $2,000
+      - $1,500
+      - $1,000
+      - $500
+    answer: 2
+    because: 1,500 minus 500 is 1,000. That thousand is available to absorb losses or open something new.
+  - question: What happens to free margin when a trade moves against you?
+    choices:
+      - It rises
+      - It falls, because equity falls
+      - It stays fixed
+      - It converts to used margin
+    answer: 1
+    because: A floating loss reduces equity, and free margin is calculated from equity, so it shrinks in step.
+  - question: What does free margin hitting zero mean?
+    choices:
+      - You have made a profit
+      - Your equity has fallen to your used margin, meaning a margin call
+      - You have no open trades
+      - Your broker owes you money
+    answer: 1
+    because: Free margin at zero means equity equals used margin, which is a margin level of exactly 100%. That is the warning line.
+---
+
+Free margin is the honest answer to "how much room do I have?"
+
+<Formula expression="Free margin = Equity − Used margin" />
+
+<Worked>
+Balance **$2,000**, one trade open needing **$500** of margin, currently showing **minus $200**.
+
+Equity = 2,000 − 200 = **$1,800**
+Used margin = **$500**
+Free margin = 1,800 − 500 = **$1,300**
+
+That $1,300 is your cushion. It is what the market can take from you before things start going wrong.
+</Worked>
+
+## It does two jobs
+
+<TwoUp
+  left={{
+    title: 'It absorbs losses',
+    tone: 'plain',
+    points: [
+      'Every pip against you eats into it',
+      'When it reaches zero, you are at a margin call',
+      'It is the buffer between a bad trade and a closed account',
+      'This is the job that matters',
+    ],
+  }}
+  right={{
+    title: 'It funds new trades',
+    tone: 'plain',
+    points: [
+      'You can only open a trade if free margin covers its deposit',
+      'Every new position reduces it twice: locked margin, plus new floating risk',
+      'Running it low is how accounts become fragile',
+      'This is the job that tempts you',
+    ],
+  }}
+/>
+
+<Callout kind="warning" title="Just because you can does not mean you should">
+Free margin of $1,300 means your platform will happily let you open several more trades. It is telling you what is permitted, not what is wise.
+
+The question is never "can I open this?" It is "if this goes wrong, and the others go wrong at the same time, what is left?"
+</Callout>
+
+## Watching it shrink
+
+Two different things eat free margin, and they can happen together:
+
+1. **Opening more trades** — used margin rises, so free margin falls even with no price movement.
+2. **Trades going against you** — equity falls, so free margin falls.
+
+Do both at once, which is exactly what a trader does when adding to a losing position, and it disappears alarmingly fast.
+
+<MarginDashboard balance={1500} leverage={100} lots={0.4} move={-20} caption="Push the trade size up and the price move down together. That combination is how most accounts actually die." />
+
+## When it goes negative
+
+Free margin can go below zero. It means your floating losses have eaten past your entire deposit for those trades. At that point your broker is no longer watching. It is acting.
+
+That is the margin call, and it is two lessons away.

@@ -1,0 +1,118 @@
+---
+oneThing: The margin call level is the warning line; the margin call itself is what happens when you cross it.
+minutes: 4
+terms:
+  - term: Margin call level
+    plain: The margin level percentage at which your broker warns you and blocks new trades. Usually 100%.
+  - term: Margin call
+    plain: The event itself. The warning, the blocked account, the request to add funds or close positions.
+  - term: Blocked account
+    plain: You can still close trades, but you cannot open anything new.
+quiz:
+  - question: What is a margin call level?
+    choices:
+      - The price your trade closes at
+      - The margin level percentage that triggers a warning from your broker
+      - The maximum leverage available
+      - The fee for using margin
+    answer: 1
+    because: It is a threshold on your margin level, most commonly 100%, at which the broker warns you and stops you opening more.
+  - question: At a 100% margin call level, what has happened to your account?
+    choices:
+      - You have doubled your money
+      - Your equity has fallen to equal your used margin
+      - Your balance is zero
+      - Your trades have been closed
+    answer: 1
+    because: A margin level of 100% means equity equals used margin exactly. Your free margin is zero.
+  - question: Can you still trade after a margin call?
+    choices:
+      - Yes, normally
+      - You can close positions but not open new ones
+      - No, the account is frozen entirely
+      - Only with permission
+    answer: 1
+    because: The broker blocks new positions while allowing you to reduce risk by closing existing ones.
+  - question: What are your options at a margin call?
+    choices:
+      - Only deposit more money
+      - Close positions, reduce size, or deposit funds
+      - Wait, there is nothing to do
+      - Ask the broker to reverse the trade
+    answer: 1
+    because: You either raise equity by depositing, or reduce used margin by closing. Waiting is a choice too, and usually the worst one.
+---
+
+A margin call is your broker tapping you on the shoulder and saying: *we are both getting uncomfortable now.*
+
+## The two words mean different things
+
+The **margin call level** is a number set by your broker, usually 100%. The **margin call** is what happens when your margin level touches it.
+
+<Formula expression="Margin call level = the margin level % at which the broker intervenes" note="Most commonly 100%. Check yours; they vary." />
+
+## What 100% actually means
+
+<Worked>
+Balance **$1,000**, one mini lot open, used margin **$108**.
+
+The trade goes against you by **$892**.
+
+Equity = 1,000 − 892 = **$108**
+Used margin = **$108**
+Margin level = (108 ÷ 108) × 100 = **100%**
+
+Your entire account is now doing nothing but holding the deposit on one trade. There is no cushion left at all. Free margin is exactly zero.
+</Worked>
+
+## What happens next
+
+<Steps
+  steps={[
+    { title: 'You get warned', body: 'An email, an alert, or the margin level turning red on your platform. Some brokers are noisier than others.' },
+    { title: 'New trades are blocked', body: 'You cannot open anything else. You can still close what you have.' },
+    { title: 'The clock keeps running', body: 'This is not a pause. The market keeps moving, and if it keeps going against you, the stop out is next.' },
+    { title: 'You choose', body: 'Deposit more, close something, or do nothing and let the broker decide for you.' },
+  ]}
+/>
+
+<Callout kind="warning" title="It is not a request">
+The name is a leftover from an era when a broker genuinely telephoned to ask for more money. Nothing is being asked now. It is an automatic warning from a system that is already preparing to close your trades.
+</Callout>
+
+## What to do about it
+
+Honestly? By the time you are here, all the good options are behind you.
+
+<TwoUp
+  left={{
+    title: 'Sensible now',
+    tone: 'good',
+    points: [
+      'Close the worst position and free its margin',
+      'Reduce size across the board',
+      'Accept the loss and start again smaller',
+      'Work out how you got here before trading again',
+    ],
+  }}
+  right={{
+    title: 'Tempting and wrong',
+    tone: 'bad',
+    points: [
+      'Deposit more so the position survives',
+      'Open a hedge and lock in the mess',
+      'Wait, because it has to come back eventually',
+      'Increase size to win it back faster',
+    ],
+  }}
+/>
+
+<Callout>
+Depositing money to rescue a losing position is the most natural thing in the world and it is how a bad week becomes a bad year. You are not defending a trade; you are increasing your investment in being right.
+</Callout>
+
+## The real lesson
+
+A margin call is not a market event. It is the arithmetic result of trading too large for the account. Nobody who risks 1% of their equity on a trade ever sees one.
+
+If you have hit a margin call, the size was wrong. That is the finding, and it is worth more than the money it cost.

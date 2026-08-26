@@ -1,0 +1,102 @@
+---
+oneThing: Margin is a deposit your broker holds while a trade is open, and it lets you control far more currency than you own.
+minutes: 5
+terms:
+  - term: Margin
+    plain: A good-faith deposit locked up while your trade is open. Not a fee, and not a loan payment.
+  - term: Margin trading
+    plain: Trading with borrowed buying power, using your deposit as security.
+  - term: Notional value
+    plain: The full size of the position you control, as opposed to the deposit you put down.
+quiz:
+  - question: What is margin?
+    choices:
+      - A fee your broker charges
+      - A deposit held while the trade is open, returned when you close
+      - Interest on borrowed money
+      - The profit on a trade
+    answer: 1
+    because: Margin is security, not a cost. It is locked while the trade is open and released, in full, when you close.
+  - question: With 100:1 leverage, how much margin does a $100,000 position need?
+    choices:
+      - $100,000
+      - $10,000
+      - $1,000
+      - $100
+    answer: 2
+    because: Divide the position size by the leverage. $100,000 divided by 100 is $1,000.
+  - question: Whose money is at risk in a margin trade?
+    choices:
+      - The broker's
+      - Yours
+      - Both equally
+      - Nobody's until you close
+    answer: 1
+    because: The broker's exposure is protected by your deposit and by their right to close you out. Every pound of loss is yours.
+  - question: Why is margin trading dangerous?
+    choices:
+      - The margin can be stolen
+      - Losses are calculated on the full position, not on your small deposit
+      - Brokers charge high interest
+      - Margin trades cannot be closed
+    answer: 1
+    because: You control $100,000 with $1,000, so a 1% adverse move wipes out your entire deposit. Losses scale with the position, not the deposit.
+---
+
+This section is the most important in Preschool. Skip it and you will eventually destroy an account without understanding what happened.
+
+## What margin actually is
+
+Margin is **a deposit**, not a fee. Your broker sets it aside while your trade is open and gives it back, in full, when you close. It exists so that if the trade goes against you, there is money there to cover the loss.
+
+<Formula expression="Required margin = Position size ÷ Leverage" note="At 100:1 leverage, a $100,000 position requires $1,000 of margin." />
+
+<Analogy>
+You rent a car worth 20 lakh. The rental company does not ask for 20 lakh. They put a 20,000 rupee hold on your card.
+
+That hold is not payment. It is security. Return the car undamaged and it is released. Crash it and they take what they need.
+
+Margin is that hold, and the crash is a losing trade.
+</Analogy>
+
+## What it lets you do
+
+<Worked title="A $1,000 account at 100:1">
+Without leverage, $1,000 buys about **920 euros**. A 50 pip move would earn you about **$5**. Not worth the effort.
+
+With 100:1 leverage, your $1,000 controls **$100,000** of currency, one standard lot. Now a 50 pip move is worth **$500**.
+
+That is why the whole industry runs on margin. Without it, small accounts could not meaningfully trade at all.
+</Worked>
+
+## And what it does to you
+
+Read that example again, and notice it never said which direction.
+
+<Callout kind="warning" title="The part that ends accounts">
+Your losses are calculated on the **whole position**, not on your deposit.
+
+Control $100,000 with $1,000, and the currency moves 1% against you. That is $1,000. Your entire deposit, gone, from a move that happens on an ordinary weekday afternoon.
+</Callout>
+
+Try it yourself. Set the deposit to $1,000 and the trade size to 1 lot, then drag the price move slider left.
+
+<MarginDashboard balance={1000} leverage={100} lots={1} move={0} caption="One standard lot on a $1,000 deposit. Count how few pips it takes to reach the margin call line." />
+
+## What is coming in this section
+
+Margin brings a small vocabulary with it, and each word gets its own short lesson:
+
+<Steps
+  steps={[
+    { title: 'Balance', body: 'What you deposited, before open trades are counted.' },
+    { title: 'Floating P/L', body: 'The profit or loss on trades still open.' },
+    { title: 'Equity', body: 'Balance plus floating P/L. Your account right now, if everything closed this second.' },
+    { title: 'Used margin', body: 'How much is locked up as deposits on open trades.' },
+    { title: 'Free margin', body: 'What is left over to absorb losses or open new trades.' },
+    { title: 'Margin level', body: 'Equity as a percentage of used margin. The number that decides your fate.' },
+    { title: 'Margin call and stop out', body: 'The warning, and the point where your broker closes your trades for you.' },
+  ]}
+/>
+
+None of these are hard on their own. Take them one at a time and the whole thing becomes obvious.

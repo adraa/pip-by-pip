@@ -3,6 +3,7 @@ import BarCompare from './BarCompare.astro';
 import Callout from './Callout.astro';
 import Candles from './Candles.astro';
 import Figure from './Figure.astro';
+import Formula from './Formula.astro';
 import Ladder from './Ladder.astro';
 import MarginDashboard from './MarginDashboard.astro';
 import PairAnatomy from './PairAnatomy.astro';
@@ -20,6 +21,7 @@ export const mdxComponents = {
   Callout,
   Candles,
   Figure,
+  Formula,
   Ladder,
   MarginDashboard,
   PairAnatomy,

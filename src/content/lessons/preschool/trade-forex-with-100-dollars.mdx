@@ -1,0 +1,108 @@
+---
+oneThing: You can trade with $100, but only in micro lots, and only if you accept that the point is learning rather than earning.
+minutes: 5
+terms:
+  - term: Micro lot
+    plain: 1,000 units. One pip is about ten cents.
+  - term: Nano lot
+    plain: 100 units. One pip is about one cent. Offered by a few brokers.
+  - term: Risk per trade
+    plain: How much of your account you are willing to lose on one trade. 1% is a standard target.
+quiz:
+  - question: What is the largest sensible trade size on a $100 account?
+    choices:
+      - One standard lot
+      - One mini lot
+      - One micro lot, or less
+      - Whatever the leverage allows
+    answer: 2
+    because: A micro lot risks ten cents a pip. Anything larger makes a routine market move a catastrophe on an account this size.
+  - question: Risking 1% of a $100 account means risking how much per trade?
+    choices:
+      - $10
+      - $1
+      - $0.10
+      - $100
+    answer: 1
+    because: One percent of $100 is $1, which with a micro lot means a stop loss about 10 pips away.
+  - question: What is the real purpose of a $100 account?
+    choices:
+      - Growing it into $10,000
+      - Experiencing real emotions and real mechanics at a trivial cost
+      - Impressing people
+      - Qualifying for higher leverage
+    answer: 1
+    because: It is the cheapest way to meet the feelings that demo cannot produce. Treating it as an income source is what destroys it.
+  - question: Why do most $100 accounts disappear?
+    choices:
+      - Broker fees
+      - The account is too small to feel meaningful, so people trade far too large to speed it up
+      - Spreads are higher on small accounts
+      - Brokers close them
+    answer: 1
+    because: Sensible sizing on $100 earns pennies, which is boring, so people size up. Oversized trades on a tiny account end quickly.
+---
+
+Yes, you can. Brokers will happily open an account for $100 or less. The interesting question is what happens next.
+
+## What $100 can actually do
+
+<Worked title="One micro lot, sensibly">
+Account: **$100**, leverage 100:1.
+Trade: **one micro lot** (1,000 units) of EUR/USD.
+
+Required margin: about **$10.85**
+One pip: **$0.10**
+
+A 50 pip win: **+$5.00**
+A 30 pip loss: **−$3.00**
+
+Perfectly survivable. You could be wrong thirty times in a row and still have an account.
+</Worked>
+
+That is real trading. Real money, real mechanics, real feelings, at a cost of a few dollars a week while you learn.
+
+## What $100 cannot do
+
+The same maths, read the other way, is the problem.
+
+<Callout kind="warning" title="The boredom trap">
+A good month on that account might make **$15**. That is a genuinely excellent 15% return, and it is fifteen dollars.
+
+Fifteen dollars is not exciting. So the trader thinks: what if I traded a mini lot instead, ten times bigger? Now the same month makes $150.
+
+And a 50 pip loss, which happens constantly, is $50. Half the account. Two of those and it is over.
+</Callout>
+
+This is why small accounts die. Not the market. The arithmetic of impatience.
+
+## The mini lot on $100, in numbers
+
+<Worked title="What ten times too big looks like">
+Account **$100**, one **mini lot** of EUR/USD. One pip is **$1**.
+Required margin: **$108.50**.
+
+The margin needed is more than the entire account. The trade will be rejected.
+
+At the highest offshore leverage the trade might squeeze through, and then a **90 pip** move, an ordinary Tuesday, closes the account entirely.
+</Worked>
+
+<MarginDashboard balance={100} leverage={100} lots={0.1} move={0} caption="Set the deposit to $100 and try a 0.10 lot trade, then a 0.01 lot trade. The difference between the two is the difference between an account and a fireworks display." />
+
+## The honest way to use a small account
+
+<Steps
+  steps={[
+    { title: 'Decide it is tuition, not capital', body: 'This $100 is what you are paying to learn. If it goes, you learned something. Do not deposit money you need.' },
+    { title: 'Trade micro lots only', body: 'Ten cents a pip. If your broker offers nano lots, better still.' },
+    { title: 'Risk about 1% per trade', body: 'One dollar. With a micro lot that is roughly a 10 pip stop, which is tight but workable on the right pairs.' },
+    { title: 'Measure in pips, not money', body: 'A 60 pip month is a 60 pip month whether the account is $100 or $100,000. Judge the skill, not the amount.' },
+    { title: 'Add funds from income, not from winning', body: 'Grow the account by depositing from your salary as your skill improves, not by trading larger to catch up.' },
+  ]}
+/>
+
+<Callout>
+Here is the reframe that makes a small account work. You are not trying to turn $100 into $1,000. You are trying to prove, cheaply, that you can follow a plan for six months.
+
+If you can do that, the account size becomes a solvable problem. If you cannot, no account size would have saved you.
+</Callout>

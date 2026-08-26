@@ -1,0 +1,24 @@
+---
+type Props = {
+  /** e.g. "Equity = Balance + Floating P/L" */
+  expression: string;
+  note?: string;
+};
+
+const { expression, note } = Astro.props;
+const parts = expression.split('=');
+---
+
+<div class="my-7 rounded-xl border border-accent/25 bg-accent-soft px-5 py-4 text-center">
+  <p class="font-sans text-[1.05rem] leading-relaxed text-accent-ink">
+    {
+      parts.map((part, index) => (
+        <>
+          {index > 0 && <span class="mx-2 opacity-50">=</span>}
+          <span class={index === 0 ? 'font-semibold' : ''}>{part.trim()}</span>
+        </>
+      ))
+    }
+  </p>
+  {note && <p class="mt-2 font-sans text-[0.78rem] text-ink-faint">{note}</p>}
+</div>

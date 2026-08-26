@@ -1,0 +1,101 @@
+---
+oneThing: Floating profit is the score of a game still being played; it is not money until you close the trade.
+minutes: 3
+terms:
+  - term: Unrealised profit or loss
+    plain: The profit or loss on a trade that is still open. Also called floating P/L.
+  - term: Realised profit or loss
+    plain: The result once the trade is closed. Final, and added to your balance.
+  - term: Mark to market
+    plain: Revaluing an open position at the current price, continuously.
+quiz:
+  - question: What does "unrealised" mean?
+    choices:
+      - The profit has been paid out
+      - The trade is still open, so the result is not final
+      - The broker has not confirmed it
+      - It is a tax term only
+    answer: 1
+    because: Unrealised means the position is open and the number is still changing. Closing the trade realises it.
+  - question: Your open trade shows plus $300. How much money have you made?
+    choices:
+      - $300
+      - $0 so far, and $300 if you closed right now
+      - $300 minus tax
+      - It depends on the broker
+    answer: 1
+    because: Floating profit is what you would receive if you closed at this instant. Until then it can grow, shrink or reverse.
+  - question: Which figure does floating P/L feed into?
+    choices:
+      - Balance
+      - Equity
+      - Deposits
+      - Leverage
+    answer: 1
+    because: Equity is balance plus floating P/L, which is why equity moves second by second while balance sits still.
+  - question: Why does a floating loss matter even before you close?
+    choices:
+      - It does not matter at all
+      - It reduces your equity, and low enough equity gets you closed out automatically
+      - It is deducted from your balance
+      - It increases your leverage
+    answer: 1
+    because: Floating losses eat equity, and equity is what the margin level is measured from. A big enough floating loss triggers a stop out.
+---
+
+Open a trade and a number starts moving on your screen. Green, red, green again. That number is your **unrealised**, or **floating**, profit and loss.
+
+<Formula expression="Floating P/L = (Current price − Entry price) × Position size" note="Reversed, naturally, if you are short." />
+
+## It is a forecast, not a receipt
+
+<Analogy>
+It is half time and your team is 2-0 up. Are you celebrating?
+
+Slightly, but nobody is putting it in the record books, because the game is still on. A 2-0 lead at half time is genuinely valuable information and it is not a result.
+
+Floating profit is a half-time score.
+</Analogy>
+
+The number is real in the sense that you could close right now and take it. It is not real in the sense that you have it.
+
+## Why it feels like money
+
+Because your brain files it as money the moment it turns green. This produces two classic failures, and almost every trader commits both.
+
+<TwoUp
+  left={{
+    title: 'Cutting winners early',
+    tone: 'plain',
+    points: [
+      'The trade is plus $80 and you feel rich',
+      'It dips to plus $60 and you panic',
+      'You close it to protect the "profit"',
+      'It goes on to plus $400 without you',
+    ],
+  }}
+  right={{
+    title: 'Letting losers run',
+    tone: 'bad',
+    points: [
+      'The trade is minus $80 and it feels unreal',
+      'Closing would make the loss actually happen',
+      'So you wait for it to come back',
+      'At minus $600 you are no longer trading, you are hoping',
+    ],
+  }}
+/>
+
+<Callout kind="warning" title="Where the asymmetry comes from">
+A floating profit feels like something you might lose. A floating loss feels like something that has not happened yet.
+
+Both feelings are wrong, and they push you in exactly the wrong direction: out of good trades early and into bad trades forever. Recognising the feeling is most of the cure.
+</Callout>
+
+## Where it goes on your platform
+
+Floating P/L is what turns balance into **equity**:
+
+<Formula expression="Equity = Balance + Floating P/L" />
+
+That is the next lesson, and it is the number that actually decides whether your account survives the afternoon.

@@ -1,0 +1,103 @@
+---
+oneThing: Leverage is the ratio your broker offers; margin is the deposit that ratio produces. They are two views of the same thing.
+minutes: 4
+terms:
+  - term: Leverage
+    plain: The ratio of position size to deposit. 100:1 means $1 controls $100.
+  - term: Margin requirement
+    plain: The same relationship as a percentage. 1% is 100:1.
+  - term: Effective leverage
+    plain: The leverage you are actually using, which is what really matters.
+quiz:
+  - question: How do leverage and margin relate?
+    choices:
+      - They are unrelated
+      - They are two ways of expressing the same ratio
+      - Leverage is a fee, margin is a deposit
+      - Margin causes leverage to rise
+    answer: 1
+    because: Leverage is the ratio, margin is the deposit it implies. 100:1 and a 1% margin requirement are identical statements.
+  - question: What is effective leverage?
+    choices:
+      - The maximum your broker offers
+      - The leverage you are actually using, based on position size versus equity
+      - Leverage after fees
+      - The leverage on your largest trade only
+    answer: 1
+    because: Available leverage is a ceiling. Effective leverage is your total position size divided by your equity, and it is what determines your real risk.
+  - question: You have $2,000 equity and $20,000 of open positions. What is your effective leverage?
+    choices:
+      - 100:1
+      - 50:1
+      - 10:1
+      - 2:1
+    answer: 2
+    because: 20,000 divided by 2,000 is 10, so you are using 10:1, whatever your account is capable of.
+  - question: Which number should you actually manage?
+    choices:
+      - The leverage your broker offers
+      - Your effective leverage
+      - The margin requirement percentage
+      - The stop out level
+    answer: 1
+    because: Available leverage is set by someone else. Effective leverage is entirely your choice, and it is the one that decides survival.
+---
+
+These two words get used interchangeably, and they describe the same relationship from opposite ends.
+
+<Formula expression="Leverage = 100 ÷ Margin requirement %" note="100:1 leverage and a 1% margin requirement are the same sentence." />
+
+| Leverage | Margin requirement | To control $100,000 you need |
+| --- | --- | --- |
+| 500:1 | 0.2% | $200 |
+| 100:1 | 1% | $1,000 |
+| 50:1 | 2% | $2,000 |
+| 30:1 | 3.33% | $3,333 |
+| 10:1 | 10% | $10,000 |
+
+<Analogy>
+A shop offers a "10% deposit" scheme. Another offers "ten times your money in credit". These are the same offer, described by a cautious accountant and an enthusiastic salesman.
+
+Margin is the accountant's phrasing. Leverage is the salesman's. That is genuinely the whole difference.
+</Analogy>
+
+## The number that actually matters
+
+Here is the distinction worth carrying away. Your broker's leverage is a **ceiling**. What matters is how much of it you use.
+
+<Formula expression="Effective leverage = Total position size ÷ Equity" />
+
+<Worked title="Two traders, same broker, same 500:1 available">
+**Trader A**: $10,000 equity, one micro lot open ($1,085).
+Effective leverage: about **0.1:1**. Practically unleveraged.
+
+**Trader B**: $1,000 equity, three standard lots open ($325,500).
+Effective leverage: about **325:1**. A 30 pip move ends them.
+
+Same broker. Same offer. Two entirely different activities.
+</Worked>
+
+<Callout kind="warning" title="This is the whole point of the margin section">
+"How much leverage does my broker offer?" is almost the wrong question. "How much am I using?" is the right one.
+
+You can be reckless at 20:1 and conservative at 500:1. The setting on the account does not decide; the size of your trades does.
+</Callout>
+
+## Sensible effective leverage
+
+Rough guidance for someone learning:
+
+- **Under 5:1** — conservative, comfortable, and where you should live while learning.
+- **5:1 to 10:1** — active trading with proper risk control.
+- **10:1 to 20:1** — aggressive. Only with a tested plan and tight stops.
+- **Above 20:1** — you are relying on being right quickly.
+
+<Worked title="Work out yours">
+Equity: **$2,000**. Open: **2 mini lots** of EUR/USD at 1.0850, so $21,700 of position.
+
+21,700 ÷ 2,000 = **10.85:1**
+
+Aggressive, but within reach of sane. Add a third mini lot and you are at 16:1, and the question becomes whether your stop losses are tight enough to justify it.
+</Worked>
+
+Check this number occasionally. It takes ten seconds and it is a far better health indicator than your profit and loss.

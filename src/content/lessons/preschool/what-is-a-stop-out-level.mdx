@@ -1,0 +1,115 @@
+---
+oneThing: The stop out is the point where your broker stops warning you and starts closing your trades itself.
+minutes: 4
+terms:
+  - term: Stop out level
+    plain: The margin level at which the broker begins force-closing your positions. Commonly 50%.
+  - term: Force close
+    plain: A position closed by the broker, not by you, at whatever price is available.
+  - term: Negative balance protection
+    plain: A rule in some countries preventing your account from going below zero.
+quiz:
+  - question: What is a stop out?
+    choices:
+      - A warning from your broker
+      - The broker automatically closing your positions
+      - Your own stop loss triggering
+      - The end of the trading day
+    answer: 1
+    because: At the stop out level the broker takes over and closes positions to protect itself. It is not a warning.
+  - question: Which position does a broker usually close first?
+    choices:
+      - The smallest
+      - The oldest
+      - Usually the largest losing one
+      - A random choice
+    answer: 2
+    because: Most brokers close the biggest loser first, since that frees the most margin fastest, though the exact rule varies.
+  - question: Can a stop out happen without a margin call first?
+    choices:
+      - Never
+      - Yes, if the price moves fast enough to jump both levels
+      - Only at weekends
+      - Only on demo accounts
+    answer: 1
+    because: In a fast move or a weekend gap the price can blow through both thresholds before anything can react.
+  - question: What is negative balance protection?
+    choices:
+      - Insurance on your profits
+      - A rule preventing your account going below zero and leaving you owing the broker
+      - A guaranteed stop loss
+      - Protection from spread widening
+    answer: 1
+    because: In regulated jurisdictions the broker must absorb any shortfall, so the worst case is losing your deposit rather than owing money.
+---
+
+The margin call was a warning. The stop out is not.
+
+<Formula expression="Stop out level = the margin level % at which the broker closes your trades for you" note="Commonly 50%, but it varies widely by broker." />
+
+## What happens, in order
+
+<Steps
+  steps={[
+    { title: 'Your margin level reaches the stop out', body: 'Commonly 50%. Your equity is now half the margin locked up.' },
+    { title: 'The broker closes a position', body: 'Usually the largest losing one, since that releases the most margin.' },
+    { title: 'It recalculates', body: 'Closing one trade frees its margin and realises its loss, producing a new margin level.' },
+    { title: 'If still below, it closes another', body: 'And repeats, until the margin level is back above the threshold or nothing is left.' },
+  ]}
+/>
+
+<Worked title="A stop out in progress">
+Three trades open, used margin **$600**, equity has fallen to **$300**.
+
+Margin level = (300 ÷ 600) × 100 = **50%**. Stop out triggered.
+
+The broker closes the largest loser. That trade's **$250** of margin is released and its **$180** loss is realised.
+
+New used margin: **$350**. New equity: **$300**.
+New margin level = (300 ÷ 350) × 100 = **86%**.
+
+Above 50%, so the closures stop. You keep two positions and a much smaller account.
+</Worked>
+
+<Callout kind="warning" title="The cruellest detail">
+Stop outs happen at the worst possible moment, by definition: the instant the market has moved furthest against you. That is very often the exact point at which it turns around.
+
+Traders watch their positions closed at the low, then watch the price recover an hour later. The stop out did not cause that. Position size did.
+</Callout>
+
+## When it happens without warning
+
+Both thresholds are checked continuously, but in a genuinely fast market, or across a weekend gap, the price can jump straight through both. You get no warning, no margin call, just a closed account and an email.
+
+This is precisely why "I will watch it closely" is not a risk management plan.
+
+## Can you end up owing money?
+
+This depends entirely on where your broker is regulated.
+
+<TwoUp
+  left={{
+    title: 'With negative balance protection',
+    tone: 'good',
+    points: [
+      'Required in the EU, UK and Australia for retail clients',
+      'Your account cannot go below zero',
+      'The broker absorbs any shortfall',
+      'Worst case: you lose your deposit',
+    ],
+  }}
+  right={{
+    title: 'Without it',
+    tone: 'bad',
+    points: [
+      'Common with offshore brokers',
+      'A gap can leave your balance negative',
+      'The broker can pursue you for the difference',
+      'This genuinely happened to many in the 2015 franc collapse',
+    ],
+  }}
+/>
+
+<Callout>
+"Do you offer negative balance protection?" is a question worth asking before you deposit anything. If the answer is no, or unclear, that tells you what kind of firm you are dealing with.
+</Callout>

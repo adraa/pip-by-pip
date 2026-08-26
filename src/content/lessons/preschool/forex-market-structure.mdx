@@ -1,0 +1,111 @@
+---
+oneThing: Forex has no central exchange; it is a ladder of participants, with the biggest banks at the top getting the best prices.
+minutes: 4
+terms:
+  - term: Interbank market
+    plain: The top tier, where the largest banks trade directly with each other.
+  - term: Liquidity provider
+    plain: An institution that quotes prices others can trade against.
+  - term: Retail broker
+    plain: The company an individual trades through. It sits near the bottom of the ladder.
+quiz:
+  - question: How is forex structured compared with a stock market?
+    choices:
+      - A single central exchange
+      - A ladder of participants trading directly with each other
+      - A government auction each morning
+      - One bank sets all prices
+    answer: 1
+    because: There is no exchange. Forex is a decentralised network, with tiers of participants and progressively worse prices as you go down.
+  - question: Who sits at the top of the ladder?
+    choices:
+      - Retail brokers
+      - Hedge funds
+      - The largest international banks
+      - Individual traders
+    answer: 2
+    because: The biggest banks trade with each other in the interbank market and see the tightest prices anywhere.
+  - question: Why do two brokers show slightly different prices?
+    choices:
+      - One of them is lying
+      - There is no single official price, so each quotes from its own liquidity sources
+      - Different countries have different currencies
+      - Prices update at different speeds only
+    answer: 1
+    because: With no central exchange there is no single official price. Each broker builds its quote from whoever it sources liquidity from, plus its own markup.
+  - question: Where do you sit in the structure?
+    choices:
+      - At the top, alongside the banks
+      - At the bottom, trading through a broker
+      - Outside it entirely
+      - Alongside central banks
+    answer: 1
+    because: A retail trader accesses the market through a broker, which is the last rung of the ladder and the one with the widest prices.
+---
+
+There is no forex exchange. No building, no bell, no single official price. Instead there is a **ladder**, and where you stand on it decides what price you see.
+
+<Figure caption="Prices get slightly worse at every step down. The gaps are tiny in absolute terms and they are why the whole structure exists.">
+  <Ladder
+    topNote="Best prices"
+    bottomNote="Worst prices"
+    tiers={[
+      { label: 'Major international banks', note: 'Trade directly with each other in the interbank market. Tightest prices in existence.' },
+      { label: 'Smaller banks and large funds', note: 'Deal through the majors, at a slightly worse price.' },
+      { label: 'Brokers and liquidity providers', note: 'Aggregate prices from several banks and pass them on.' },
+      { label: 'Retail brokers', note: 'Add their own markup, which becomes your spread.' },
+      { label: 'You', note: 'Trade whatever price arrives at the bottom of the ladder.' },
+    ]}
+  />
+</Figure>
+
+<Analogy>
+Think of vegetables. The wholesaler buys a tonne at the farm gate for the lowest price anyone will ever pay. A distributor buys from the wholesaler for a bit more. The corner shop buys from the distributor. You buy from the corner shop.
+
+Same vegetables, four prices, and each step is somebody's living. Forex is that, with currency, and with much thinner margins.
+</Analogy>
+
+## Why nobody built an exchange
+
+Currencies are not issued by one authority and are traded by every government, bank and company on earth, continuously, around the clock. There was never a natural place to put an exchange, and the market grew as a network of relationships instead.
+
+This has consequences you will meet every week:
+
+- **No official price.** Two brokers can show slightly different numbers for the same pair at the same moment, and neither is wrong.
+- **No official volume.** When an indicator shows you forex "volume", it is your broker's volume, or futures volume used as a proxy. It is not the market's.
+- **Nobody can corner it.** No single institution is big enough to control the price of a major currency for long. Even central banks manage it only briefly.
+
+## Where your trade actually goes
+
+When you click buy, one of two things happens.
+
+<TwoUp
+  left={{
+    title: 'Passed through',
+    tone: 'good',
+    points: [
+      'Your broker sends the trade to a liquidity provider',
+      'They earn from the spread or a commission',
+      'Their interest is in you trading often and surviving',
+      'Sometimes advertised as STP or ECN',
+    ],
+  }}
+  right={{
+    title: 'Kept in-house',
+    tone: 'plain',
+    points: [
+      'Your broker takes the other side themselves',
+      'They earn if you lose',
+      'Legal and normal, and how most small trades are handled',
+      'Which is exactly why regulation matters so much',
+    ],
+  }}
+/>
+
+<Callout kind="warning">
+Neither model is automatically evil, but the second one has a conflict of interest baked into it. That is why "is this broker properly regulated?" is the most important question in Kindergarten, and why it deserves more of your attention than choosing an indicator ever will.
+</Callout>
+
+## What this means for you
+
+You are at the bottom of the ladder. You cannot change that, and it does not stop you being profitable. It just means your costs are structural, not negotiable, and the only lever you control is choosing a broker who does not add more markup than they need to.

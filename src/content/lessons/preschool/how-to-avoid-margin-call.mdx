@@ -1,0 +1,117 @@
+---
+oneThing: Margin calls are a symptom of position size, so the cure is to trade small enough that your stop loss always arrives first.
+minutes: 5
+terms:
+  - term: Risk per trade
+    plain: The money you lose if your stop loss is hit. Keep it near 1% of equity.
+  - term: Position sizing
+    plain: Working out trade size from your stop distance and your risk, rather than guessing.
+  - term: Correlation
+    plain: When several positions are effectively the same bet, so they lose together.
+quiz:
+  - question: What is the root cause of a margin call?
+    choices:
+      - Bad luck
+      - Wrong analysis
+      - Position size too large for the account
+      - Broker settings
+    answer: 2
+    because: A properly sized position hits its stop loss long before the margin level becomes an issue. Size is the cause every time.
+  - question: How much of your account should one trade risk?
+    choices:
+      - 1% or so
+      - 10%
+      - 25%
+      - As much as the margin allows
+    answer: 0
+    because: Around 1% means a run of ten losses costs about a tenth of the account. Survivable, and it keeps you calm enough to think.
+  - question: Why does a stop loss prevent margin calls?
+    choices:
+      - Brokers waive margin calls if you use stops
+      - It closes the trade at a planned loss, long before equity falls far enough to matter
+      - It increases your margin
+      - It reduces leverage
+    answer: 1
+    because: The stop takes you out at a small, chosen loss. The margin call only exists for people who let the loss run unbounded.
+  - question: Why is holding EUR/USD, GBP/USD and AUD/USD long at once risky?
+    choices:
+      - Too many charts to watch
+      - They are correlated, so it is effectively one large bet against the dollar
+      - Brokers charge more
+      - The spreads are wider
+    answer: 1
+    because: Correlated positions move together, so what looks like three diversified trades is one concentrated position at triple size.
+---
+
+Everything in this section has been leading here, and the conclusion is unglamorous: **you avoid margin calls by trading smaller.**
+
+That is not one technique among many. It is the whole answer, and everything below is a way of implementing it.
+
+## The six rules
+
+<Steps
+  steps={[
+    {
+      title: 'Risk about 1% per trade',
+      body: 'On a $1,000 account, risk $10. Lose ten in a row and you are down about 10%, which is a bad month rather than a disaster. This single rule prevents almost every margin call.',
+    },
+    {
+      title: 'Always place a stop loss, at entry',
+      body: 'Placed before the trade is open, while you are calm. A stop loss makes the loss a decision instead of an outcome, and it always triggers long before a margin call is possible.',
+    },
+    {
+      title: 'Work out the size from the stop, not the other way round',
+      body: 'Decide the stop distance first, then calculate how many lots keep the loss at 1%. Never pick a size and then find somewhere to put the stop.',
+    },
+    {
+      title: 'Keep effective leverage low',
+      body: 'Total position size divided by equity, under 10:1 while learning. Check it occasionally, especially with several trades open.',
+    },
+    {
+      title: 'Count correlated trades as one',
+      body: 'Long EUR/USD, GBP/USD and AUD/USD is one bet against the dollar in three pieces. If you would not risk 3% on one trade, do not do it in three.',
+    },
+    {
+      title: 'Never add to a loser to fix it',
+      body: 'Averaging down increases size exactly when the account is weakest. It is the single most reliable route from a bad trade to no account.',
+    },
+  ]}
+/>
+
+## Sizing, worked properly
+
+<Worked title="The calculation, every time">
+Account equity: **$1,000**
+Risk per trade at 1%: **$10**
+Your analysis puts a sensible stop **25 pips** away.
+
+Value per pip you can afford = $10 ÷ 25 = **$0.40 per pip**
+
+A micro lot is $0.10 per pip, so you can trade **4 micro lots**, or 0.04 lots.
+
+Now check it: if the stop is hit you lose $10, exactly as planned. Margin used is about $43. Your margin level stays in the hundreds of percent throughout. A margin call is simply not on the table.
+</Worked>
+
+Do that arithmetic before every trade and this entire section becomes theoretical knowledge, which is exactly where you want it.
+
+## Seeing it work
+
+<MarginDashboard balance={1000} leverage={100} lots={0.04} move={-25} caption="A properly sized trade, fully stopped out. Look at the margin level. It is barely bruised." />
+
+Now set the trade size to 1 lot and try the same 25 pip move. That is the difference the sizing calculation makes.
+
+## The uncomfortable truth
+
+<Callout kind="warning">
+A margin call is not something that happens to you. It is something you set up in advance, by choosing a size, and then wait for the market to deliver.
+
+Nobody who risks 1% per trade with a stop loss has ever received one. Not because they were lucky, or right, but because the arithmetic does not allow it.
+</Callout>
+
+## The end of Preschool
+
+You now know what forex is, how a trade works, when to trade, who else is in the market, and precisely how accounts are destroyed.
+
+That last part is the one that matters most, and it is why the whole margin section sits at the end of the first course rather than buried somewhere later.
+
+Kindergarten is next: choosing who holds your money, the three ways of reading a market, and how to read a chart.

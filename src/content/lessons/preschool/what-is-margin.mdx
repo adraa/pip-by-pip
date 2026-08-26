@@ -1,0 +1,98 @@
+---
+oneThing: Required margin is the deposit one particular trade needs, worked out from its size and your leverage.
+minutes: 4
+terms:
+  - term: Required margin
+    plain: The deposit needed to open one specific trade.
+  - term: Margin requirement
+    plain: The same thing expressed as a percentage. 1% is the same as 100:1 leverage.
+  - term: Notional value
+    plain: The full value of the position you are controlling.
+quiz:
+  - question: How do you calculate required margin?
+    choices:
+      - Position size multiplied by leverage
+      - Position size divided by leverage
+      - Leverage divided by position size
+      - Position size minus your balance
+    answer: 1
+    because: Divide the position size by the leverage. $50,000 at 50:1 needs $1,000.
+  - question: A 2% margin requirement is the same as what leverage?
+    choices:
+      - 2:1
+      - 20:1
+      - 50:1
+      - 200:1
+    answer: 2
+    because: Divide 100 by the percentage. 100 divided by 2 is 50, so 2% equals 50:1.
+  - question: You open one mini lot of EUR/USD at 1.0850 with 100:1 leverage. Roughly how much margin?
+    choices:
+      - About $10
+      - About $108
+      - About $1,085
+      - About $10,850
+    answer: 1
+    because: A mini lot is 10,000 euros, worth about $10,850. Divided by 100, that is roughly $108.
+  - question: What happens to the required margin when you close the trade?
+    choices:
+      - The broker keeps it
+      - It is released back to your free margin
+      - It is converted to profit
+      - It is charged as a fee
+    answer: 1
+    because: Margin is a deposit, not a cost. Closing the trade releases it immediately.
+---
+
+Every trade you open needs its own deposit. That deposit is the **required margin**, and it is worked out from two things: how big the trade is, and how much leverage you have.
+
+<Formula expression="Required margin = Position size ÷ Leverage" />
+
+## Working it out
+
+<Worked title="Three trades, same account">
+Leverage of **100:1** throughout, EUR/USD at 1.0850.
+
+**One micro lot** (1,000 euros, about $1,085)
+$1,085 ÷ 100 = **$10.85 of margin**
+
+**One mini lot** (10,000 euros, about $10,850)
+$10,850 ÷ 100 = **$108.50 of margin**
+
+**One standard lot** (100,000 euros, about $108,500)
+$108,500 ÷ 100 = **$1,085 of margin**
+</Worked>
+
+Notice that the margin is worked out from the value of the position in your **account's currency**, which is why the current exchange rate creeps into the sum.
+
+## Margin requirement is the same thing, said backwards
+
+Some brokers quote a percentage rather than a ratio. They mean the same thing.
+
+| Margin requirement | Leverage | $10,000 position needs |
+| --- | --- | --- |
+| 50% | 2:1 | $5,000 |
+| 10% | 10:1 | $1,000 |
+| 3.33% | 30:1 | $333 |
+| 2% | 50:1 | $200 |
+| 1% | 100:1 | $100 |
+| 0.2% | 500:1 | $20 |
+
+<Formula expression="Leverage = 100 ÷ Margin requirement %" note="A 2% requirement is 50:1. A 0.5% requirement is 200:1." />
+
+## It is a deposit, not a cost
+
+Worth repeating because it genuinely confuses people: **margin is not spent.** It is set aside. Close the trade and every cent of it comes straight back, whatever the trade's result.
+
+What you lose or gain is a separate matter, calculated from the price move.
+
+<Callout kind="warning" title="The regulated leverage difference">
+Where you live changes this dramatically. In Europe, the UK and Australia, retail leverage on major pairs is capped at **30:1**, so a standard lot needs about $3,600 of margin rather than $1,085.
+
+Offshore brokers advertising 500:1 are not offering you something better. They are offering you enough rope, in a jurisdiction where nobody will help you if it goes wrong.
+</Callout>
+
+## Several trades at once
+
+Each open trade locks its own margin. Three mini lots open at once at 100:1 lock roughly $325 in total, and that is money no longer available to absorb losses.
+
+Add them all together and you get **used margin**, which is coming in two lessons' time.

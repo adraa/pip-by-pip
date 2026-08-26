@@ -16,7 +16,8 @@
     "db:seed:local": "wrangler d1 execute pip-by-pip --local --file=./seed.sql",
     "db:seed:remote": "wrangler d1 execute pip-by-pip --remote --file=./seed.sql",
     "setup": "npm run db:local && npm run codes && npm run db:seed:local",
-    "astro": "astro"
+    "astro": "astro",
+    "check:lessons": "node scripts/check-lessons.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.2.5",
@@ -31,6 +32,7 @@
     "esbuild": true
   },
   "devDependencies": {
-    "wrangler": "^4.126.0"
+    "wrangler": "^4.126.0",
+    "yaml": "^2.9.0"
   }
 }

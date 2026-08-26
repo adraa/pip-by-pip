@@ -1,0 +1,94 @@
+---
+oneThing: Every broker sets its own margin call and stop out levels, and you need to know yours before you need to know it.
+minutes: 4
+terms:
+  - term: Broker terms
+    plain: The specific thresholds and rules your broker applies to your account.
+  - term: Tiered margin
+    plain: A rule where larger positions require proportionally more margin.
+  - term: Weekend margin
+    plain: Increased margin requirements applied before the market closes on Friday.
+quiz:
+  - question: Are margin call and stop out levels the same everywhere?
+    choices:
+      - Yes, they are set by regulators globally
+      - No, each broker sets its own
+      - Yes, always 100% and 50%
+      - Only for large accounts
+    answer: 1
+    because: They vary considerably between brokers, and some set both at the same level while others separate them widely.
+  - question: What is tiered margin?
+    choices:
+      - Margin that decreases over time
+      - Larger positions requiring proportionally more margin
+      - A discount for frequent traders
+      - Margin charged per day
+    answer: 1
+    because: Many brokers raise the margin requirement as position size grows, because larger positions are harder for them to hedge.
+  - question: Why might margin requirements rise on a Friday?
+    choices:
+      - Fewer traders are active
+      - To cover the risk of a weekend gap
+      - Because of higher spreads
+      - Regulators require it daily
+    answer: 1
+    because: The market closes but news does not stop, so brokers increase margin before the weekend to cover the gap risk.
+  - question: Where do you find your broker's actual levels?
+    choices:
+      - They are never published
+      - In the account terms, contract specifications, or by asking support directly
+      - Only after a margin call
+      - On a public regulator database
+    answer: 1
+    because: They are in the terms and the contract specifications, and any legitimate broker's support will tell you plainly if you ask.
+---
+
+The last two lessons used 100% and 50%. Those are common defaults, not universal law. Your broker may be entirely different, and the difference matters.
+
+## The range you will actually find
+
+| Setup | Margin call | Stop out | What it feels like |
+| --- | --- | --- | --- |
+| Combined | 100% | 100% | No warning zone at all |
+| Common | 100% | 50% | A useful gap to react in |
+| Generous | 100% | 20% | A long rope, for better and worse |
+| Tight | 150% | 100% | Closed out early, which can be protective |
+| Tiered | Varies by size | Varies by size | Rules change as your position grows |
+
+<Callout kind="warning" title="Lower is not safer">
+A 20% stop out sounds generous. It means your broker lets the position run until 80% of your equity relative to margin is gone.
+
+Generous and dangerous are the same thing here. More rope keeps a bad trade alive longer, and it is only good news if you were going to act yourself, which you were not, or you would have already.
+</Callout>
+
+## The other rules nobody reads
+
+Beyond the two headline numbers, brokers apply conditions that surprise people at bad moments.
+
+<Steps
+  steps={[
+    { title: 'Tiered margin', body: 'The requirement rises with position size. Your first lot might need 1%, your tenth 2%. Scaling up is more expensive than the simple sum suggests.' },
+    { title: 'Weekend margin', body: 'Requirements increase on Friday afternoon to cover gap risk. A position that was comfortable all week can trigger a call on Friday evening without the price moving.' },
+    { title: 'Higher margin around news', body: 'Some brokers raise requirements before major events such as elections and central bank decisions.' },
+    { title: 'Exotic pairs cost more', body: 'Less liquid pairs carry much higher margin requirements than the majors.' },
+    { title: 'Which position gets closed first', body: 'Most close the largest loser first. Some close the oldest. Some close everything at once. It is in the terms.' },
+  ]}
+/>
+
+## Three questions to ask, today
+
+Send these to your broker's support and keep the reply.
+
+1. What are my margin call and stop out levels, as percentages?
+2. Do margin requirements change with position size, on Fridays, or around news?
+3. Do you offer negative balance protection?
+
+<Callout>
+Any legitimate broker answers all three plainly within a day. Vagueness, deflection or a link to a fifty-page PDF with no page number is itself the answer.
+</Callout>
+
+## Why this is worth ten minutes now
+
+You will not think about any of this while a trade is going well. You will only think about it in the middle of a bad afternoon, and by then it will be too late to find out.
+
+Ten minutes today. It is the cheapest risk management available.
