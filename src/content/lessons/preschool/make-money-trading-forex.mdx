@@ -1,0 +1,94 @@
+---
+oneThing: You make money by buying a currency cheaply and selling it dearly, or selling it dearly and buying it back cheaply.
+minutes: 4
+terms:
+  - term: Position
+    plain: A trade you currently have open.
+  - term: Entry
+    plain: The price at which you opened the trade.
+  - term: Exit
+    plain: The price at which you closed it. The gap between the two is your result.
+quiz:
+  - question: You buy EUR/USD at 1.0850 and close at 1.0900. What happened?
+    choices:
+      - You lost, because the number went up
+      - You made 50 pips
+      - You broke even
+      - You made 500 pips
+    answer: 1
+    because: You bought and the price rose by 0.0050, which is 50 pips. Buy low, sell high.
+  - question: You sell USD/JPY at 150.00 and close at 149.50. What happened?
+    choices:
+      - You made 50 pips
+      - You lost 50 pips
+      - Nothing, shorts cannot profit
+      - You made 5 pips
+    answer: 0
+    because: You sold first and bought back cheaper. Selling high and buying low profits exactly the same way as buying low and selling high.
+  - question: When does a profit or loss become real?
+    choices:
+      - The moment the price moves
+      - When you close the trade
+      - At the end of the trading day
+      - When your broker sends a statement
+    answer: 1
+    because: While the trade is open your profit floats and can vanish. It only becomes yours when you close.
+  - question: What decides your result on a trade?
+    choices:
+      - Only the entry price
+      - Only the exit price
+      - The gap between entry and exit, and your trade size
+      - How long you held it
+    answer: 2
+    because: Result is the price difference multiplied by how much you traded. Nothing else.
+---
+
+Strip everything away and trading is one sentence: **get in at one price, get out at a better one.**
+
+That is it. Every indicator, every chart pattern, every hour of study in this course exists to help you guess which direction is better than a coin flip. The mechanics themselves never get more complicated than this.
+
+## Buying low, selling high
+
+<Figure caption="A buy that worked. In at 1.0850, out at 1.0900, fifty pips better off.">
+  <Candles
+    candles={[
+      [1.0842, 1.0858, 1.0838, 1.0851],
+      [1.0851, 1.0863, 1.0846, 1.0858],
+      [1.0858, 1.0872, 1.0855, 1.0869],
+      [1.0869, 1.0881, 1.0864, 1.0877],
+      [1.0877, 1.0894, 1.0872, 1.0889],
+      [1.0889, 1.0906, 1.0884, 1.0901],
+    ]}
+    markers={[
+      { index: 0, label: 'buy 1.0850', kind: 'buy' },
+      { index: 5, label: 'sell 1.0900', kind: 'sell' },
+    ]}
+  />
+</Figure>
+
+You bought euros when they cost 1.0850 dollars each. Later they cost 1.0900 dollars each. You sold. The 0.0050 difference is your profit, and how much money that represents depends entirely on how many euros you bought. That "how many" question is the next few lessons.
+
+## Selling high, buying low
+
+The half that trips people up. You can do exactly the same thing backwards.
+
+<Analogy>
+Your neighbour offers to lend you a sack of onions today if you return an identical sack next week. Onions are expensive right now, so you sell the borrowed sack immediately for 1,000 rupees. Next week onions are cheap, you buy a sack for 800, hand it back, and keep the 200.
+
+You profited from a falling price. Forex works the same way, except you never have to arrange any of it. Selling EUR/USD simply means you are holding dollars instead of euros for a while.
+</Analogy>
+
+## Nothing is real until you close
+
+While a trade is open, your profit is **floating**. The screen shows a number, but that number is a weather forecast, not a receipt. It moves every second and it can go from green to red while you are making tea.
+
+<Callout kind="warning">
+A floating profit is not money. It becomes money at the moment you close the trade, and not one second before. A great many traders have watched a large floating profit turn into a loss while waiting for it to get even larger.
+</Callout>
+
+## Your result has exactly two ingredients
+
+1. **How far the price moved** between your entry and your exit.
+2. **How big your trade was.**
+
+That is the whole formula. The first ingredient is what all the analysis is for. The second is what all the risk management is for, and it is the one that actually decides whether you survive.

@@ -1,0 +1,116 @@
+---
+oneThing: The Asian session is the quiet one, where prices tend to sit in a range rather than trend.
+minutes: 4
+terms:
+  - term: Range
+    plain: A stretch where the price bounces between a ceiling and a floor rather than going anywhere.
+  - term: Asian session
+    plain: Tokyo plus Singapore, Hong Kong and Sydney. Usually just called Tokyo.
+  - term: Range trading
+    plain: Buying near the bottom of a range and selling near the top, rather than following a trend.
+quiz:
+  - question: What is the Asian session best known for?
+    choices:
+      - The largest trends of the day
+      - Quiet, range-bound trading
+      - The tightest spreads
+      - The most news releases
+    answer: 1
+    because: With lower volume, prices tend to drift between levels rather than break out and run.
+  - question: Which pairs are most active during Tokyo hours?
+    choices:
+      - EUR/GBP and EUR/CHF
+      - USD/JPY, AUD/USD and NZD/USD
+      - USD/CAD and USD/MXN
+      - GBP/USD only
+    answer: 1
+    because: The currencies of the region are the ones with real local business flowing through them during those hours.
+  - question: Why can the last hours of Tokyo be interesting?
+    choices:
+      - Tokyo closes early
+      - London traders arrive and volume jumps
+      - Spreads are widest then
+      - Central banks always announce then
+    answer: 1
+    because: From around 07:00 GMT the Tokyo and London sessions overlap, and the arrival of European volume often breaks the Asian range.
+  - question: Which trading style suits the Asian session least?
+    choices:
+      - Range trading
+      - Breakout trading
+      - Placing limit orders at range edges
+      - Doing nothing
+    answer: 1
+    because: Breakouts need volume behind them. In quiet hours they frequently fail and snap back, which is the classic Asian session trap.
+---
+
+Tokyo is the first proper session of the trading day, and it has a distinct personality: **contained**.
+
+<SessionsClock caption="Set the slider to around 03:00 GMT. Tokyo is open, everyone else is asleep, and that is the whole Asian session in one picture." />
+
+## What it feels like
+
+Prices during Tokyo hours tend to pick a ceiling and a floor and bounce gently between them. Big directional runs are the exception, not the rule.
+
+<Figure caption="A typical Asian session on USD/JPY. Nothing much happens, repeatedly, between two levels.">
+  <Candles
+    candles={[
+      [150.2, 150.32, 150.14, 150.28],
+      [150.28, 150.34, 150.19, 150.22],
+      [150.22, 150.31, 150.16, 150.29],
+      [150.29, 150.33, 150.2, 150.23],
+      [150.23, 150.3, 150.17, 150.27],
+      [150.27, 150.32, 150.21, 150.24],
+    ]}
+    levels={[
+      { price: 150.34, label: 'ceiling' },
+      { price: 150.14, label: 'floor' },
+    ]}
+  />
+</Figure>
+
+There is a straightforward reason. The volume that produces big moves lives in London and New York. During Tokyo hours it is simply not there, so the price has nothing pushing it hard in one direction.
+
+## Which pairs actually move
+
+Local business drives local currencies, so during these hours the action is in:
+
+- **USD/JPY** and the other yen pairs, since this is Japan's working day
+- **AUD/USD** and **NZD/USD**, since Australia and New Zealand are awake
+- **AUD/JPY** and **NZD/JPY**, which combine both
+
+Meanwhile **EUR/GBP** or **EUR/CHF** are barely breathing. Europe is asleep, and nobody with a reason to move those pairs is at their desk.
+
+<Callout>
+Trade what is awake. Trading a European cross during Tokyo hours means paying a wider spread for a price that is barely moving. It is the worst of both.
+</Callout>
+
+## How people trade it
+
+<TwoUp
+  left={{
+    title: 'Works reasonably well',
+    tone: 'good',
+    points: [
+      'Range trading: sell near the ceiling, buy near the floor',
+      'Yen and Aussie pairs, where the real flow is',
+      'Placing orders for the London session rather than trading now',
+      'Trading Japanese and Australian economic releases',
+    ],
+  }}
+  right={{
+    title: 'Usually a trap',
+    tone: 'bad',
+    points: [
+      'Chasing breakouts, which routinely fail on thin volume',
+      'Expecting a trend to develop and run',
+      'Trading European crosses',
+      'Forcing a trade because you are awake and bored',
+    ],
+  }}
+/>
+
+## The interesting hour
+
+From about **07:00 GMT** London traders start arriving while Tokyo is still open. Volume jumps, and the tidy Asian range frequently breaks.
+
+Plenty of traders never trade the Asian session at all. They just note where the range formed and use those levels as their map for the London open. That is a perfectly respectable way to use these hours, and it involves no trading whatsoever.

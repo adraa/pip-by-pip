@@ -1,0 +1,96 @@
+---
+oneThing: London is the biggest session, and it is where the day's trend usually gets set.
+minutes: 4
+terms:
+  - term: London session
+    plain: Roughly 07:00 to 16:00 GMT. The largest block of forex trading in the day.
+  - term: Volatility
+    plain: How much the price moves around. High volatility means bigger swings, for better and worse.
+  - term: London open
+    plain: The first hour or two of the session, often the most violent of the day.
+quiz:
+  - question: Why does London handle so much forex volume?
+    choices:
+      - The pound is the strongest currency
+      - Its timezone overlaps with both Asia and America, and it is the historic centre of currency dealing
+      - British law requires it
+      - It has the lowest fees
+    answer: 1
+    because: London sits between the Asian and American working days and has been the centre of international currency dealing for well over a century.
+  - question: What typically happens in the first hour of London?
+    choices:
+      - Nothing until New York opens
+      - A sharp burst of volatility that often sets the day's direction
+      - Spreads widen dramatically
+      - The market closes for a break
+    answer: 1
+    because: A flood of European volume arrives at once, and the tidy Asian range is usually broken decisively in that first hour or two.
+  - question: Which pairs are most active in London?
+    choices:
+      - AUD/JPY and NZD/JPY
+      - EUR/USD, GBP/USD and the European crosses
+      - USD/CAD only
+      - None, London is a quiet session
+    answer: 1
+    because: Europe is at work, so the euro and pound pairs carry the most genuine business flow.
+  - question: What is the risk of trading the London open?
+    choices:
+      - Spreads are too wide to trade
+      - The speed makes it easy to be stopped out by a spike before the real move begins
+      - There is no liquidity
+      - Brokers block orders
+    answer: 1
+    because: The first move is often violent and sometimes false. Traders regularly get stopped out on a spike, then watch the real move go the way they originally wanted.
+---
+
+If you can only trade one session, this is usually the one.
+
+<SessionsClock caption="Set the slider to 09:00 GMT. London alone, at full volume. Then try 13:00 and watch New York join it." />
+
+## Why it dominates
+
+London handles a larger share of daily forex volume than any other centre, and it has for a very long time. Two reasons: history, since international currency dealing grew up there, and geography, since London's working day touches the end of Asia's and the start of America's.
+
+The practical consequence is that **the market often does not really wake up until London does.** Prices that drifted sideways for six hours suddenly develop an opinion at 07:00 GMT.
+
+<Figure caption="The Asian range on the left, then London arrives. This shape repeats endlessly.">
+  <Candles
+    candles={[
+      [1.0848, 1.0854, 1.0843, 1.085],
+      [1.085, 1.0855, 1.0845, 1.0847],
+      [1.0847, 1.0853, 1.0842, 1.0851],
+      [1.0851, 1.0872, 1.0849, 1.0868],
+      [1.0868, 1.0891, 1.0864, 1.0886],
+      [1.0886, 1.0904, 1.088, 1.0899],
+    ]}
+    markers={[{ index: 3, label: 'London opens', kind: 'note' }]}
+  />
+</Figure>
+
+## What moves
+
+Europe is at work, so European currencies carry real business flow:
+
+- **EUR/USD** — the most traded pair in the world, at its most active
+- **GBP/USD** — busy and notably jumpy
+- **EUR/GBP**, **EUR/CHF** and the other European crosses, which barely move at any other time
+
+Spreads are at or near their tightest for the day, which quietly makes every trade cheaper.
+
+## The opening hour
+
+The first hour or two has its own reputation, and it is deserved.
+
+<Callout kind="warning" title="The London open trap">
+A large amount of pent-up volume arrives at once. The price often lurches hard in one direction, stops out everyone positioned the other way, then reverses and makes the real move.
+
+Traders who arrive with a plan use this. Traders who arrive with excitement get taken apart by it.
+</Callout>
+
+Two sane approaches: either wait thirty to sixty minutes and trade once the first burst has resolved, or use wider stops that can survive the noise. Trading the first five minutes with a tight stop is how beginners donate money.
+
+## The afternoon
+
+From about **12:00 GMT** New York joins in, and the next four hours are the busiest of the trading day. That overlap gets its own lesson, because it is where a great deal of the week's real movement happens.
+
+After New York's morning, London traders start going home, volume drains away, and the late afternoon often turns into aimless drift.

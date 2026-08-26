@@ -1,0 +1,110 @@
+---
+oneThing: Going long means betting the first currency rises; going short means betting it falls. Both are equally easy.
+minutes: 5
+terms:
+  - term: Long
+    plain: Buying. You profit if the price goes up.
+  - term: Short
+    plain: Selling first, buying back later. You profit if the price goes down.
+  - term: Base currency
+    plain: The first currency in the pair. Everything is said from its point of view.
+  - term: Quote currency
+    plain: The second currency. The price is measured in it.
+quiz:
+  - question: You buy EUR/USD. What are you hoping happens?
+    choices:
+      - The euro gets cheaper against the dollar
+      - The euro gets more expensive against the dollar
+      - Both currencies fall
+      - The price stays exactly where it is
+    answer: 1
+    because: Buying a pair means buying the first currency. You want the euro to become more expensive in dollar terms, which means the number goes up.
+  - question: You sell GBP/USD. What are you actually doing?
+    choices:
+      - Selling pounds and buying dollars
+      - Selling dollars and buying pounds
+      - Selling both currencies
+      - Nothing until the price moves
+    answer: 0
+    because: Selling a pair means selling the base currency and buying the quote currency. Sell GBP/USD and you are out of pounds and into dollars.
+  - question: Why can you profit from a falling market in forex?
+    choices:
+      - Brokers refund losing trades
+      - Because selling one currency is always buying another one
+      - Because of leverage
+      - You cannot; you can only profit when prices rise
+    answer: 1
+    because: There is no such thing as a purely falling forex market. If one currency is falling the other is rising, and you can be on either side.
+  - question: In USD/JPY, which currency are you buying when you go long?
+    choices:
+      - The yen
+      - The dollar
+      - Both equally
+      - Neither, it is a bet on the price only
+    answer: 1
+    because: The base currency comes first. Long USD/JPY means buying dollars and selling yen.
+---
+
+Every pair has a first currency and a second one, and the order matters enormously. The first one is the **base**. Everything the price says is said about the base.
+
+<Figure caption="Read every pair as a sentence: one unit of the base costs this much of the quote.">
+  <PairAnatomy base="GBP" quote="USD" price="1.2640" baseNote="one pound" quoteNote="costs 1.2640 dollars" />
+</Figure>
+
+## Two directions, both open to you
+
+In most markets you make money when things go up. Forex has no natural "up", because a price is a ratio between two currencies. So both directions are equally available, and equally normal.
+
+<TwoUp
+  left={{
+    title: 'Buying, or going long',
+    tone: 'good',
+    points: [
+      'You buy the base currency',
+      'You profit if the number goes up',
+      'Example: buy EUR/USD at 1.0850, sell at 1.0900, you made 50 pips',
+      'You believed the euro would get stronger than the dollar',
+    ],
+  }}
+  right={{
+    title: 'Selling, or going short',
+    tone: 'bad',
+    points: [
+      'You sell the base currency',
+      'You profit if the number goes down',
+      'Example: sell EUR/USD at 1.0850, buy back at 1.0800, you made 50 pips',
+      'You believed the euro would get weaker than the dollar',
+    ],
+  }}
+/>
+
+Selling something you do not own sounds strange, and in most markets it is a complicated manoeuvre. In forex it is not, because a sale of one currency is automatically a purchase of the other. Selling EUR/USD just means you are holding dollars instead of euros. Nothing exotic is happening.
+
+<Analogy>
+You are at the airport and you think the pound is about to fall. So you swap your pounds for dollars now. A week later the pound has fallen, you swap back, and you end up with more pounds than you started with.
+
+You just went short the pound. No borrowing, no tricks. You simply held the other currency for a while.
+</Analogy>
+
+## Say it out loud
+
+The confusion always comes from forgetting which currency you are talking about. Get in the habit of reading the trade as a full sentence.
+
+<Steps
+  steps={[
+    { title: 'Buy EUR/USD', body: 'I am buying euros and paying with dollars. I want euros to get more expensive.' },
+    { title: 'Sell EUR/USD', body: 'I am selling euros and taking dollars. I want euros to get cheaper.' },
+    { title: 'Buy USD/JPY', body: 'I am buying dollars and paying with yen. I want the dollar to get more expensive.' },
+    { title: 'Sell USD/JPY', body: 'I am selling dollars and taking yen. I want the dollar to get cheaper.' },
+  ]}
+/>
+
+<Callout kind="warning">
+The most common beginner mistake is thinking "I want the dollar to go up" and then buying EUR/USD. That trade wants the dollar to go **down**. Always check which side of the slash your opinion is on.
+</Callout>
+
+## The price only ever tells you one thing
+
+Whatever chart you are staring at, the number answers a single question: how many units of the second currency does one unit of the first cost?
+
+Rising number, base getting stronger. Falling number, base getting weaker. That is the entire language.

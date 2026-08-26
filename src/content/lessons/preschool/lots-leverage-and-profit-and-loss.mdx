@@ -1,0 +1,100 @@
+---
+oneThing: A lot is the size of your trade, and it alone decides how much money each pip is worth to you.
+minutes: 5
+terms:
+  - term: Lot
+    plain: A standard bundle of currency. One standard lot is 100,000 units.
+  - term: Mini lot
+    plain: 10,000 units. One pip is about $1.
+  - term: Micro lot
+    plain: 1,000 units. One pip is about $0.10. Where beginners should start.
+  - term: Leverage
+    plain: Borrowing from your broker so you can control a large trade with a small deposit.
+quiz:
+  - question: How many units is one standard lot?
+    choices:
+      - 1,000
+      - 10,000
+      - 100,000
+      - 1,000,000
+    answer: 2
+    because: A standard lot is 100,000 units of the base currency, which makes one pip worth about ten dollars.
+  - question: You trade one mini lot and win 40 pips. Roughly what did you make?
+    choices:
+      - $4
+      - $40
+      - $400
+      - $4,000
+    answer: 1
+    because: A mini lot is 10,000 units, so one pip is about one dollar. Forty pips is about forty dollars.
+  - question: What does leverage of 100:1 mean?
+    choices:
+      - You must trade 100 lots
+      - Every $1 of your money controls $100 of currency
+      - Your profits are multiplied by 100
+      - Your broker charges 100% interest
+    answer: 1
+    because: Leverage is a ratio of control to deposit. At 100:1, $1,000 of your money controls $100,000 of currency.
+  - question: What does leverage do to your losses?
+    choices:
+      - Reduces them
+      - Leaves them unchanged
+      - Magnifies them exactly as much as it magnifies gains
+      - Caps them at your deposit
+    answer: 2
+    because: Leverage is neutral about direction. It enlarges whatever happens, which is why it is the most common cause of blown accounts.
+---
+
+A pip is a distance. A **lot** is how much you are carrying while you walk it.
+
+## Three sizes
+
+| Name     | Units   | One pip is worth | Reasonable for            |
+| -------- | ------- | ---------------- | ------------------------- |
+| Standard | 100,000 | about $10        | Large, experienced accounts |
+| Mini     | 10,000  | about $1         | A funded, tested account   |
+| Micro    | 1,000   | about $0.10      | Learning, and your first live trades |
+
+Same market, same pips, entirely different consequences.
+
+<Worked title="One 50 pip loss, three sizes">
+The price goes 50 pips against you. You close the trade.
+
+- **Standard lot:** down **$500**
+- **Mini lot:** down **$50**
+- **Micro lot:** down **$5**
+
+Nothing about your analysis changed between those three lines. Only the size did.
+</Worked>
+
+## How you afford 100,000 of anything
+
+Obvious problem: a standard lot means controlling a hundred thousand dollars' worth of currency, and you do not have that. This is where **leverage** comes in.
+
+Your broker lets you put down a small deposit and control a much larger position. At 100:1 leverage, $1,000 of yours controls $100,000 of currency.
+
+<Analogy>
+You buy a house worth 50 lakh with 5 lakh of your own money and a 45 lakh loan. The house rises 10% and you have made 5 lakh, doubling your money. Wonderful.
+
+Now the house falls 10%. Your entire 5 lakh is gone, and you still owe the bank.
+
+That is leverage. It does not care which direction it is amplifying.
+</Analogy>
+
+## The dangerous part, seen properly
+
+Leverage does not increase your profit *rate*. It increases your **size**, and size cuts both ways with perfect symmetry. Play with this until it feels uncomfortable, because that discomfort is the lesson.
+
+<MarginDashboard balance={1000} leverage={100} lots={0.1} move={-30} caption="Push the trade size up with a $1,000 deposit and watch how few pips it takes to reach a margin call." />
+
+Notice what happens if you set the trade size to 1 lot on a $1,000 deposit. It takes a move of well under a hundred pips, a perfectly ordinary Tuesday, to destroy the account.
+
+<Callout kind="warning" title="The number that actually matters">
+Beginners ask "how much leverage does this broker offer?" as though more is better. The question that matters is "how many lots am I trading relative to my account?" You can have 500:1 available and trade responsibly. You can have 20:1 and blow up.
+</Callout>
+
+## Where to start
+
+Micro lots. One pip costs you ten cents, a bad day costs you the price of a coffee, and you learn exactly the same lessons you would learn losing hundreds.
+
+There is no prize for being brave early.

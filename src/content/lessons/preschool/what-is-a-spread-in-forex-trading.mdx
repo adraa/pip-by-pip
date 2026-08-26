@@ -1,0 +1,108 @@
+---
+oneThing: The spread is the gap between the buying price and the selling price, and it is what your trade costs you.
+minutes: 4
+terms:
+  - term: Spread
+    plain: The difference between the price you can buy at and the price you can sell at.
+  - term: Fixed spread
+    plain: A spread your broker keeps constant, whatever the market is doing.
+  - term: Variable spread
+    plain: A spread that widens and narrows with market conditions.
+quiz:
+  - question: What is the spread?
+    choices:
+      - A fee charged monthly by the broker
+      - The gap between the buy price and the sell price
+      - The distance to your stop loss
+      - Tax on profits
+    answer: 1
+    because: There are always two prices. The gap between them is the spread, and it is the broker's cut.
+  - question: You buy at the ask and immediately close. What happens?
+    choices:
+      - You break even
+      - You are down by the spread
+      - You are up by the spread
+      - Nothing, the trade is cancelled
+    answer: 1
+    because: You buy at the higher price and sell at the lower one, so an instantly closed trade loses exactly the spread.
+  - question: When do spreads typically widen?
+    choices:
+      - During the London and New York overlap
+      - In quiet hours and around big news announcements
+      - On Monday mornings only
+      - When you are profitable
+    answer: 1
+    because: Fewer participants or sudden uncertainty means fewer people willing to quote, so the gap between buyers and sellers grows.
+  - question: Why does the spread matter more to a scalper than to a long-term trader?
+    choices:
+      - Scalpers pay a higher rate
+      - A scalper pays it many times a day while aiming for small moves
+      - Long-term traders do not pay it
+      - It does not matter to either
+    answer: 1
+    because: If you aim for 5 pips and pay 1.5 in spread, nearly a third of your target is gone before you start. Hold for 300 pips and it is noise.
+---
+
+There is never one price. There are always two: one to buy at, one to sell at. The gap between them is the **spread**, and it is how most forex brokers get paid.
+
+<Figure caption="Two prices, always. You buy at the higher one and sell at the lower one, whichever direction you trade.">
+  <SpreadBoard pair="EUR/USD" bid="1.08500" ask="1.08512" spread="1.2 pips" />
+</Figure>
+
+<Analogy>
+The money changer at the airport has a board with two columns. They will sell you dollars at 84 rupees and buy them back at 82. Walk up, change rupees to dollars and immediately change back, and you are poorer by two rupees per dollar without anything happening in the world.
+
+That is the spread. Forex spreads are much smaller, but the mechanism is identical.
+</Analogy>
+
+## You start every trade slightly behind
+
+This is the part worth internalising. The moment you open a trade, it is already losing, by exactly the spread.
+
+<Worked>
+EUR/USD, spread of 1.2 pips. You buy at the ask of **1.08512**.
+
+The screen immediately shows you down **1.2 pips**, because to close you would have to sell at the bid of 1.08500.
+
+The market has not moved at all. You simply crossed the spread.
+
+For the trade to break even, the price has to rise 1.2 pips. To make 10 pips of actual profit, it has to rise 11.2.
+</Worked>
+
+## Fixed and variable
+
+<TwoUp
+  left={{
+    title: 'Variable spreads',
+    tone: 'plain',
+    points: [
+      'Move with market conditions',
+      'Very tight when the market is busy, often under a pip on EUR/USD',
+      'Can widen sharply in quiet hours or around news',
+      'What most brokers offer by default',
+    ],
+  }}
+  right={{
+    title: 'Fixed spreads',
+    tone: 'plain',
+    points: [
+      'The same number whatever happens',
+      'Predictable, which helps when planning',
+      'Usually wider than the average variable spread',
+      'The broker may still widen them in extreme conditions, despite the name',
+    ],
+  }}
+/>
+
+<Callout kind="warning" title="The 3am tax">
+The same pair can cost 0.8 pips at 2pm London and 4 pips at 3am. If you are trading in the quiet hours because that is when you are free, check the spread before you enter, every time. It is a real and often overlooked cost.
+</Callout>
+
+## Does it matter much?
+
+It depends entirely on how far you are trying to go.
+
+- Aiming for **5 pips** with a **1.5 pip** spread: you are giving away 30% of your target before you begin. Brutal.
+- Aiming for **200 pips** with the same spread: you are giving away 0.75%. Barely worth thinking about.
+
+Fast trading and wide spreads are a bad marriage. That single fact quietly rules out a whole style of trading for people with expensive brokers, and it is worth knowing before you fall in love with scalping.

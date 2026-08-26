@@ -1,0 +1,122 @@
+---
+oneThing: An order is an instruction to your broker, and choosing the right one means you do not have to sit watching a screen.
+minutes: 6
+terms:
+  - term: Market order
+    plain: Buy or sell right now, at whatever the current price is.
+  - term: Limit order
+    plain: Buy or sell only at a better price than the current one. It waits.
+  - term: Stop order
+    plain: Buy or sell once the price reaches a worse level than now. Used to cut losses or to catch a breakout.
+  - term: Stop loss
+    plain: A stop order attached to an open trade that closes it if the price goes against you.
+quiz:
+  - question: You want in immediately, whatever the price. Which order?
+    choices:
+      - Limit
+      - Market
+      - Stop
+      - Trailing stop
+    answer: 1
+    because: A market order fills right away at the current price. Everything else waits for a condition.
+  - question: EUR/USD is at 1.0850 and you only want to buy if it dips to 1.0800. Which order?
+    choices:
+      - Buy limit at 1.0800
+      - Buy stop at 1.0800
+      - Sell limit at 1.0800
+      - Market order
+    answer: 0
+    because: A buy limit waits for a better price than the current one. Better, for a buyer, means lower.
+  - question: What is a stop loss for?
+    choices:
+      - Locking in profit
+      - Closing a losing trade automatically before it gets worse
+      - Opening a trade at a better price
+      - Stopping the broker from trading
+    answer: 1
+    because: A stop loss is your pre-agreed exit if you are wrong. It is the single most important order type there is.
+  - question: What does a trailing stop do?
+    choices:
+      - Moves with the price in your favour, then stays put
+      - Moves in both directions
+      - Cancels itself after an hour
+      - Doubles your position
+    answer: 0
+    because: A trailing stop follows the price when the trade is winning and stays where it is when the price turns, locking in gains.
+---
+
+You cannot watch a chart all day, and you should not try. Orders are how you tell your broker what to do while you are asleep, at work, or making dinner.
+
+There are three that matter, and everything else is a variation.
+
+## The three you need
+
+<Steps
+  steps={[
+    {
+      title: 'Market order — "now, at whatever price"',
+      body: 'You click buy, you are in, at the current ask. Simple and instant. The price you get can differ slightly from the one you saw, which is called slippage.',
+    },
+    {
+      title: 'Limit order — "only if I get a better price"',
+      body: 'Waits patiently for a price better than the current one. A buy limit sits below the market. A sell limit sits above it. You get your price or no trade at all.',
+    },
+    {
+      title: 'Stop order — "only once it reaches a worse price"',
+      body: 'Sounds mad, but it is how you cut losses and how you catch breakouts. A buy stop sits above the market, a sell stop below it.',
+    },
+  ]}
+/>
+
+<Figure caption="Where each order sits relative to the current price. Limits wait for a better price, stops trigger at a worse one.">
+  <Candles
+    candles={[
+      [1.083, 1.0845, 1.0825, 1.0841],
+      [1.0841, 1.0852, 1.0836, 1.0848],
+      [1.0848, 1.0861, 1.0843, 1.085],
+      [1.085, 1.0858, 1.0842, 1.0851],
+      [1.0851, 1.0864, 1.0846, 1.0855],
+    ]}
+    levels={[
+      { price: 1.089, label: 'buy stop' },
+      { price: 1.08, label: 'buy limit' },
+    ]}
+  />
+</Figure>
+
+## When you would use each
+
+<Worked title="EUR/USD is trading at 1.0850">
+**You think it is going up and you want in now.**
+Market order. You are filled around 1.0851 immediately.
+
+**You think it is going up, but 1.0850 is expensive. You would happily buy a dip.**
+Buy limit at 1.0800. If the price dips there, you are in at your price. If it never dips, you never trade.
+
+**You think it only really takes off if it clears 1.0900.**
+Buy stop at 1.0905. Nothing happens unless the price climbs through that level. This is a breakout trade.
+
+**You are already long and you are willing to lose 40 pips before admitting you were wrong.**
+Stop loss at 1.0810. If it gets there, you are out automatically, and the loss stops being your decision.
+</Worked>
+
+## The two attached to every trade
+
+Once you are in a position, two orders should already be waiting.
+
+- **Stop loss** — closes you out if the price goes against you by a set amount. The most important order in trading, and the one beginners skip.
+- **Take profit** — closes you out at your target. Less critical, but it stops greed from undoing a good trade.
+
+<Callout kind="warning" title="Set the stop when you enter, not later">
+"I will watch it and close it manually if it goes wrong" is what everyone says, and it fails in exactly the moment it matters. When a trade is 60 pips against you, your brain will invent reasons to wait. A stop loss placed while you were still calm does not negotiate.
+</Callout>
+
+## Variations you will meet
+
+- **Trailing stop** — a stop loss that follows the price when the trade is winning and stays put when it turns. Locks in profit without your attention.
+- **Good till cancelled (GTC)** — the order waits indefinitely until you remove it.
+- **Good for the day (GFD)** — it expires at the end of the trading day.
+- **One cancels the other (OCO)** — two orders, and whichever triggers first kills the other. Useful when you would trade a breakout in either direction.
+- **Fill or kill** — fill the whole order right now or cancel it entirely.
+
+You do not need most of these. You need market, limit, stop and stop loss, and you need them to be automatic.

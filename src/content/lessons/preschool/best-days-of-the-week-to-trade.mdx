@@ -1,0 +1,119 @@
+---
+oneThing: Tuesday, Wednesday and Thursday do most of the week's real work; Monday is slow and Friday afternoon is treacherous.
+minutes: 4
+terms:
+  - term: Gap
+    plain: A jump between Friday's closing price and Sunday's opening price, caused by weekend news.
+  - term: Position squaring
+    plain: Traders closing out before the weekend, which distorts Friday afternoon prices.
+  - term: Weekend risk
+    plain: The danger of holding a trade through the closed market, where a stop loss cannot protect you.
+quiz:
+  - question: Which days generally offer the best trading conditions?
+    choices:
+      - Monday and Friday
+      - Tuesday, Wednesday and Thursday
+      - Saturday and Sunday
+      - All days are identical
+    answer: 1
+    because: The middle of the week has full participation and most scheduled news, while Monday warms up slowly and Friday winds down.
+  - question: Why is Friday afternoon risky?
+    choices:
+      - Spreads are always zero
+      - Traders close positions before the weekend, producing moves driven by squaring rather than direction
+      - No news is ever released
+      - Brokers close early
+    answer: 1
+    because: Late Friday movement often reflects people flattening their books rather than any real view, so it misleads and then reverses.
+  - question: What is a weekend gap?
+    choices:
+      - A pause in the middle of Saturday
+      - A jump between Friday's close and Sunday's open caused by news over the weekend
+      - A broker holiday
+      - A gap in your trading journal
+    answer: 1
+    because: The market is closed but the world is not. News over the weekend gets priced in all at once when trading resumes.
+  - question: Why can a stop loss fail to protect you over a weekend?
+    choices:
+      - Stops expire on Fridays
+      - If the price gaps past your stop, it fills at the first available price, which may be far worse
+      - Brokers cancel stops
+      - Stops only work in the London session
+    answer: 1
+    because: A stop is an instruction to trade once a level is reached. If the market reopens beyond that level, the fill happens wherever the market actually is.
+---
+
+The hour of the day matters most, but the day of the week matters too.
+
+## How a typical week goes
+
+<Steps
+  steps={[
+    {
+      title: 'Monday: warming up',
+      body: 'Traders arrive, read the weekend news and work out their view. Ranges are often narrow, and moves that start on Monday frequently fizzle. Many traders spend Monday watching rather than trading.',
+    },
+    {
+      title: 'Tuesday: the market decides',
+      body: 'Volume builds, real positions get established, and trends that last the week often begin here.',
+    },
+    {
+      title: 'Wednesday: the busiest day',
+      body: 'Full participation, plenty of scheduled news, and generally the best conditions of the week.',
+    },
+    {
+      title: 'Thursday: still strong',
+      body: 'Very active. Major central bank decisions frequently land on a Thursday. Often the largest daily ranges of the week.',
+    },
+    {
+      title: 'Friday: half a good day',
+      body: 'The morning through to the New York overlap can be excellent, especially with US data. From the afternoon onward it deteriorates fast.',
+    },
+  ]}
+/>
+
+<Figure caption="Roughly how the week's trading activity distributes. The middle carries it.">
+  <BarCompare
+    unit="relative activity"
+    items={[
+      { label: 'Monday', value: 70 },
+      { label: 'Tuesday', value: 95 },
+      { label: 'Wednesday', value: 100, highlight: true },
+      { label: 'Thursday', value: 97 },
+      { label: 'Friday', value: 80, note: 'Front-loaded; the afternoon is thin' },
+    ]}
+  />
+</Figure>
+
+## The Friday afternoon problem
+
+From roughly 16:00 GMT on a Friday, a great deal of the movement you see is not an opinion about anything. It is **position squaring**: traders closing out so they are not exposed over the weekend.
+
+<Callout kind="warning">
+A Friday afternoon move can look exactly like the start of a trend and mean nothing at all. It frequently reverses on Monday. Reading it as a signal is a common and expensive mistake.
+</Callout>
+
+## Weekend risk is real
+
+The market closes; the world does not. Elections, central bank statements, conflicts and disasters all happen at weekends, and everything gets priced in at once when trading resumes on Sunday evening.
+
+<Worked title="Why the gap matters">
+You are long EUR/USD at **1.0850**, with a stop loss at **1.0800**, holding over the weekend.
+
+Serious news breaks on Saturday. The market reopens on Sunday at **1.0700**.
+
+Your stop was at 1.0800, but the price never traded there. It jumped straight past. Your stop becomes a market order and fills around 1.0700.
+
+You planned to lose 50 pips. You lost 150. The stop worked exactly as designed and still did not save you.
+</Worked>
+
+That is the one genuine reason to think hard about Friday. Not superstition about days, just the plain fact that a closed market cannot be exited.
+
+## A reasonable weekly rhythm
+
+- **Monday:** read, plan, mostly watch.
+- **Tuesday to Thursday:** trade properly. This is the week.
+- **Friday morning:** trade if there is something worth trading.
+- **Friday afternoon:** close up, write the journal, stop.
+
+Not trading is a position. It is often the correct one.

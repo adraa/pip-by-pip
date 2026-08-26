@@ -1,0 +1,99 @@
+---
+oneThing: Buy limits and sell stops sit below the price; sell limits and buy stops sit above it.
+minutes: 3
+terms:
+  - term: Above or below
+    plain: Where the order sits relative to the current price. This is the only thing you have to remember.
+  - term: Slippage
+    plain: Being filled at a slightly different price than requested, common on stop orders in fast markets.
+quiz:
+  - question: Where does a buy limit sit?
+    choices:
+      - Above the current price
+      - Below the current price
+      - At the current price
+      - Anywhere you like
+    answer: 1
+    because: A limit waits for a better price. Better for a buyer means cheaper, so it sits below.
+  - question: Where does a buy stop sit?
+    choices:
+      - Above the current price
+      - Below the current price
+      - At the current price
+      - It cannot be used for buying
+    answer: 0
+    because: A stop triggers at a worse price. Worse for a buyer means more expensive, so it sits above.
+  - question: Which order guarantees your price but not that you trade at all?
+    choices:
+      - Market
+      - Limit
+      - Stop
+      - Trailing stop
+    answer: 1
+    because: A limit only fills at your price or better, so it may never fill. A market order guarantees the trade but not the price.
+  - question: Which order type is most exposed to slippage?
+    choices:
+      - Limit orders
+      - Stop orders in fast markets
+      - Take profit orders
+      - Orders placed at midday
+    answer: 1
+    because: A stop becomes a market order when triggered, and it triggers precisely when the price is moving fast, so the fill can be worse than the level.
+---
+
+Everything in the previous lesson, on one page. This is the one to come back to.
+
+## The whole thing in one rule
+
+**Limits wait for a better price. Stops trigger at a worse one.**
+
+Everything else follows from that, including which side of the current price the order sits on.
+
+| Order         | Sits        | You are saying                                   | Typical use              |
+| ------------- | ----------- | ------------------------------------------------ | ------------------------ |
+| Buy market    | Right here  | Get me in now                                     | Immediate entry          |
+| Sell market   | Right here  | Get me out now, or short now                      | Immediate exit or entry  |
+| **Buy limit** | **Below**   | Buy, but only if it gets cheaper                  | Buying a dip             |
+| **Sell limit**| **Above**   | Sell, but only if it gets more expensive          | Selling a rally          |
+| **Buy stop**  | **Above**   | Buy once it breaks upward through this level      | Upside breakout          |
+| **Sell stop** | **Below**   | Sell once it breaks downward through this level   | Downside breakout, or a stop loss on a long |
+
+<Callout title="The memory trick">
+Limit orders are optimistic: they wait for a bargain. Stop orders are defensive or impatient: they accept a worse price to get in or out. Optimists sit on the good side of the price, realists on the bad side.
+</Callout>
+
+## What each one guarantees
+
+<TwoUp
+  left={{
+    title: 'Limit orders',
+    tone: 'good',
+    points: [
+      'Guarantee your price',
+      'Do not guarantee you trade at all',
+      'The price may reverse just before reaching you',
+      'No slippage against you',
+    ],
+  }}
+  right={{
+    title: 'Stop and market orders',
+    tone: 'plain',
+    points: [
+      'Guarantee you trade',
+      'Do not guarantee the price',
+      'A stop becomes a market order the instant it triggers',
+      'Slippage is likeliest here, because they fire in fast markets',
+    ],
+  }}
+/>
+
+## The exits
+
+- **Stop loss** — a stop order attached to an open trade, closing it if you are wrong. On a long it is a sell stop below your entry. On a short it is a buy stop above.
+- **Take profit** — a limit order attached to an open trade, closing it at your target. On a long it is a sell limit above your entry.
+
+Look at that carefully. Your stop loss and your take profit are just the same two order types you already know, pointed in opposite directions.
+
+<Callout kind="warning">
+Every platform lays this out slightly differently, and mixing up a stop and a limit is a genuinely expensive mistake. Place your first few orders on a demo account and check that the little line appears on the side of the price you expected.
+</Callout>
