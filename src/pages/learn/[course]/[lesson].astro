@@ -1,0 +1,148 @@
+---
+import { getCollection, render } from 'astro:content';
+import Shell from '../../../layouts/Shell.astro';
+import LessonBar from '../../../components/LessonBar.astro';
+import Quiz from '../../../components/Quiz.astro';
+import FinishLesson from '../../../components/FinishLesson.astro';
+import { mdxComponents } from '../../../components/mdx';
+import { getCourse, getLesson, getNeighbours } from '../../../lib/syllabus';
+import { getEnv, getCompletedSlugs, getQuizAnswers, recordBookmark } from '../../../lib/db';
+
+export const prerender = false;
+
+const { course: courseSlug, lesson: lessonSlug } = Astro.params;
+
+const course = courseSlug ? getCourse(courseSlug) : undefined;
+const lesson = lessonSlug ? getLesson(lessonSlug) : undefined;
+
+if (!course || !lesson || lesson.courseSlug !== course.slug) {
+  return Astro.rewrite('/404');
+}
+
+const section = course.sections.find((candidate) => candidate.slug === lesson.sectionSlug)!;
+const positionInCourse = course.lessons.findIndex((candidate) => candidate.slug === lesson.slug) + 1;
+const { previous, next } = getNeighbours(lesson);
+
+const entries = await getCollection('lessons');
+const entry = entries.find((candidate) => candidate.id === `${course.slug}/${lesson.slug}`);
+
+const learner = Astro.locals.learner!;
+const env = getEnv(Astro.locals);
+await recordBookmark(env.DB, learner.id, lesson.slug);
+
+const completed = await getCompletedSlugs(env.DB, learner.id);
+const storedAnswers = await getQuizAnswers(env.DB, learner.id, lesson.slug);
+const savedChoices: Record<number, number> = {};
+for (const answer of storedAnswers) savedChoices[answer.question] = answer.choice;
+
+const Content = entry ? (await render(entry)).Content : null;
+---
+
+<Shell title={lesson.title} bare>
+  <LessonBar course={course} section={section} lesson={lesson} positionInCourse={positionInCourse} />
+
+  <article class="mx-auto max-w-3xl px-4 pt-8 pb-4 sm:px-6 sm:pt-12">
+    <header class="measure mx-auto">
+      <p class="label">Lesson {positionInCourse} · {section.title}</p>
+      <h1 class="mt-2 text-[1.9rem] leading-[1.15] font-semibold sm:text-[2.4rem]">{lesson.title}</h1>
+
+      {
+        entry && (
+          <div class="mt-6 border-l-2 border-accent pl-4">
+            <p class="label text-accent">The one thing</p>
+            <p class="mt-1 text-[1.05em] leading-relaxed text-ink">{entry.data.oneThing}</p>
+          </div>
+        )
+      }
+
+      {
+        entry && (
+          <p class="mt-4 font-sans text-[0.78rem] text-ink-faint">
+            About {entry.data.minutes} minutes to read
+          </p>
+        )
+      }
+    </header>
+
+    {
+      Content ? (
+        <div class="prose-lesson measure mx-auto mt-10">
+          <Content components={mdxComponents} />
+        </div>
+      ) : (
+        <div class="measure mx-auto mt-10 rounded-xl border border-dashed border-rule bg-sunk px-5 py-6">
+          <p class="label">Not written yet</p>
+          <p class="mt-2 text-ink-soft">
+            This lesson is in the plan but has not been rewritten yet. Courses are being written in order, so it is on
+            its way. In the meantime the original is a click away.
+          </p>
+          <a
+            href={lesson.source}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="pressable mt-4 inline-flex items-center gap-1.5 rounded-lg border border-rule bg-raised px-3 py-2 font-sans text-[0.85rem] text-ink-soft hover:text-ink"
+          >
+            Read it on BabyPips
+            <svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M6 3.5h6.5V10M12.5 3.5 4 12" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+      )
+    }
+
+    {
+      entry && entry.data.terms.length > 0 && (
+        <section class="measure mx-auto mt-14 rounded-2xl border border-rule bg-sunk p-5 sm:p-6">
+          <h2 class="label">Words from this lesson</h2>
+          <dl class="mt-3 grid gap-3">
+            {entry.data.terms.map((item) => (
+              <div class="border-t border-rule-soft pt-3 first:border-t-0 first:pt-0">
+                <dt class="font-sans text-[0.85rem] font-semibold text-ink">{item.term}</dt>
+                <dd class="mt-0.5 font-sans text-[0.85rem] leading-relaxed text-ink-soft">{item.plain}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )
+    }
+
+    {
+      entry && (
+        <div class="measure mx-auto">
+          <Quiz lesson={lesson.slug} questions={entry.data.quiz} saved={savedChoices} />
+        </div>
+      )
+    }
+
+    <div class="measure mx-auto">
+      <FinishLesson
+        lesson={lesson.slug}
+        complete={completed.has(lesson.slug)}
+        nextHref={next?.href ?? null}
+        nextTitle={next?.title ?? null}
+      />
+
+      <div class="mt-6 flex items-center justify-between gap-4 font-sans text-[0.8rem]">
+        {
+          previous ? (
+            <a href={previous.href} class="pressable max-w-[45%] truncate text-ink-faint hover:text-ink">
+              ← {previous.title}
+            </a>
+          ) : (
+            <span />
+          )
+        }
+
+        <a
+          href={lesson.source}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="shrink-0 text-ink-faint underline underline-offset-2 hover:text-ink-soft"
+        >
+          Source on BabyPips
+        </a>
+      </div>
+    </div>
+  </article>
+</Shell>

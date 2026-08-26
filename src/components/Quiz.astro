@@ -1,0 +1,170 @@
+---
+type Question = {
+  question: string;
+  choices: string[];
+  answer: number;
+  because: string;
+};
+
+type Props = {
+  lesson: string;
+  questions: Question[];
+  /** Answers already given, so returning to a lesson shows what you picked. */
+  saved: Record<number, number>;
+};
+
+const { lesson, questions, saved } = Astro.props;
+const letters = ['A', 'B', 'C', 'D'];
+---
+
+<section
+  aria-labelledby="say-it-back"
+  class="mt-14 rounded-2xl border border-rule bg-raised p-5 sm:p-7"
+  data-quiz
+  data-lesson={lesson}
+>
+  <h2 id="say-it-back" class="font-sans text-sm font-semibold tracking-wide text-ink">Say it back</h2>
+  <p class="mt-1 font-sans text-[0.85rem] text-ink-faint">
+    Four quick questions. Nothing is graded, and a wrong answer just means this one is worth another read.
+  </p>
+
+  <ol class="mt-6 grid gap-6">
+    {
+      questions.map((question, questionIndex) => {
+        const chosen = saved[questionIndex];
+        const answered = chosen !== undefined;
+        const gotItRight = chosen === question.answer;
+
+        return (
+          <li
+            class="border-t border-rule-soft pt-5 first:border-t-0 first:pt-0"
+            data-question={questionIndex}
+            data-answer={question.answer}
+            data-answered={answered ? 'true' : 'false'}
+          >
+            <p class="font-sans text-[0.95rem] leading-snug font-medium">
+              <span class="mr-2 tabular-nums text-ink-faint">{questionIndex + 1}.</span>
+              {question.question}
+            </p>
+
+            <div class="mt-3 grid gap-2">
+              {question.choices.map((choice, choiceIndex) => {
+                const isChosen = chosen === choiceIndex;
+                const revealAsAnswer = answered && choiceIndex === question.answer;
+                const chosenWrong = isChosen && !gotItRight;
+
+                return (
+                  <button
+                    type="button"
+                    data-choice={choiceIndex}
+                    disabled={answered}
+                    aria-pressed={isChosen ? 'true' : 'false'}
+                    class:list={[
+                      'pressable flex w-full items-start gap-3 rounded-lg border px-3 py-2.5 text-left font-sans text-[0.9rem]',
+                      answered ? 'cursor-default' : 'hover:border-ink-faint hover:bg-sunk',
+                      revealAsAnswer
+                        ? 'border-rise bg-rise/10 text-ink'
+                        : chosenWrong
+                          ? 'border-fall bg-fall/10 text-ink'
+                          : 'border-rule text-ink-soft',
+                    ]}
+                  >
+                    <span
+                      data-letter
+                      class:list={[
+                        'mt-px inline-flex size-5 shrink-0 items-center justify-center rounded-full border text-[0.65rem] font-semibold',
+                        revealAsAnswer
+                          ? 'border-rise text-rise'
+                          : chosenWrong
+                            ? 'border-fall text-fall'
+                            : 'border-rule text-ink-faint',
+                      ]}
+                    >
+                      {letters[choiceIndex]}
+                    </span>
+                    <span>{choice}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <p
+              data-feedback
+              hidden={!answered}
+              class="mt-3 flex gap-2 font-sans text-[0.85rem] leading-relaxed text-ink-soft"
+            >
+              <span data-verdict class:list={['font-semibold', gotItRight ? 'text-rise' : 'text-fall']}>
+                {gotItRight ? 'Yes.' : 'Not quite.'}
+              </span>
+              <span>{question.because}</span>
+            </p>
+          </li>
+        );
+      })
+    }
+  </ol>
+</section>
+
+<script>
+  const RIGHT = ['border-rise', 'bg-rise/10', 'text-ink'];
+  const WRONG = ['border-fall', 'bg-fall/10', 'text-ink'];
+  const IDLE = ['border-rule', 'text-ink-soft'];
+
+  document.querySelectorAll<HTMLElement>('[data-quiz]').forEach((quiz) => {
+    const lesson = quiz.dataset.lesson!;
+
+    quiz.addEventListener('click', (event) => {
+      const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button[data-choice]');
+      if (!button || button.disabled) return;
+
+      const item = button.closest<HTMLElement>('[data-question]')!;
+      if (item.dataset.answered === 'true') return;
+
+      const correctIndex = Number(item.dataset.answer);
+      const chosenIndex = Number(button.dataset.choice);
+      const questionIndex = Number(item.dataset.question);
+      const gotItRight = chosenIndex === correctIndex;
+
+      item.dataset.answered = 'true';
+
+      item.querySelectorAll<HTMLButtonElement>('button[data-choice]').forEach((option) => {
+        const optionIndex = Number(option.dataset.choice);
+        const letter = option.querySelector<HTMLElement>('[data-letter]')!;
+
+        option.disabled = true;
+        option.classList.remove('hover:border-ink-faint', 'hover:bg-sunk');
+        option.classList.add('cursor-default');
+
+        if (optionIndex === correctIndex) {
+          option.classList.remove(...IDLE);
+          option.classList.add(...RIGHT);
+          letter.classList.remove('border-rule', 'text-ink-faint');
+          letter.classList.add('border-rise', 'text-rise');
+        } else if (optionIndex === chosenIndex) {
+          option.classList.remove(...IDLE);
+          option.classList.add(...WRONG);
+          letter.classList.remove('border-rule', 'text-ink-faint');
+          letter.classList.add('border-fall', 'text-fall');
+        }
+      });
+
+      button.setAttribute('aria-pressed', 'true');
+
+      const feedback = item.querySelector<HTMLElement>('[data-feedback]')!;
+      const verdict = feedback.querySelector<HTMLElement>('[data-verdict]')!;
+      verdict.textContent = gotItRight ? 'Yes.' : 'Not quite.';
+      verdict.classList.toggle('text-rise', gotItRight);
+      verdict.classList.toggle('text-fall', !gotItRight);
+      feedback.hidden = false;
+      feedback.classList.add('rise-in');
+
+      void fetch('/api/quiz', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ lesson, question: questionIndex, choice: chosenIndex, correct: gotItRight }),
+      }).catch(() => {
+        /* A saved score is nice to have, not worth interrupting the reading for. */
+      });
+    });
+  });
+</script>

@@ -1,0 +1,60 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import Wordmark from './Wordmark.astro';
+import type { Learner } from '../lib/auth';
+
+type Props = { learner: Learner | null };
+const { learner } = Astro.props;
+const path = Astro.url.pathname;
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/courses', label: 'Courses' },
+  { href: '/together', label: 'Together' },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-rule bg-paper/85 backdrop-blur-md">
+  <div class="mx-auto flex h-14 max-w-5xl items-center gap-3 px-4 sm:px-6">
+    <a href="/" class="pressable -ml-1 rounded-md px-1 py-1" aria-label="Pip by Pip, home">
+      <Wordmark />
+    </a>
+
+    <nav class="ml-auto flex items-center gap-1" aria-label="Main">
+      {
+        links.map((link) => {
+          const active = link.href === '/' ? path === '/' : path.startsWith(link.href);
+          return (
+            <a
+              href={link.href}
+              aria-current={active ? 'page' : undefined}
+              class:list={[
+                'pressable rounded-full px-3 py-1.5 font-sans text-sm',
+                active ? 'bg-accent-soft text-accent-ink' : 'text-ink-soft hover:bg-sunk hover:text-ink',
+              ]}
+            >
+              {link.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <div class="flex items-center gap-2 border-l border-rule pl-3">
+      <ThemeToggle />
+      {
+        learner && (
+          <form method="post" action="/api/leave">
+            <button
+              type="submit"
+              class="pressable rounded-full px-2.5 py-1.5 font-sans text-sm text-ink-faint hover:text-ink"
+              title={`Signed in as ${learner.name}`}
+            >
+              {learner.name.split(' ')[0]}
+            </button>
+          </form>
+        )
+      }
+    </div>
+  </div>
+</header>

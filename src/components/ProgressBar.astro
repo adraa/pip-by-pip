@@ -1,0 +1,39 @@
+---
+type Props = {
+  done: number;
+  total: number;
+  /** Compact bars drop the caption. */
+  compact?: boolean;
+  label?: string;
+};
+
+const { done, total, compact = false, label } = Astro.props;
+const percent = total === 0 ? 0 : Math.round((done / total) * 100);
+---
+
+<div>
+  {
+    !compact && (
+      <div class="mb-1.5 flex items-baseline justify-between font-sans text-[0.78rem]">
+        <span class="text-ink-soft">{label ?? 'Progress'}</span>
+        <span class="tabular-nums text-ink-faint">
+          {done} of {total}
+        </span>
+      </div>
+    )
+  }
+  <div
+    class="h-1.5 w-full overflow-hidden rounded-full bg-sunk"
+    role="progressbar"
+    aria-valuenow={percent}
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-label={label ?? 'Progress'}
+  >
+    <div
+      class="h-full rounded-full bg-accent transition-[width] duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"
+      style={`width:${percent}%`}
+    >
+    </div>
+  </div>
+</div>

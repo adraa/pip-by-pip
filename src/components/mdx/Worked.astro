@@ -1,0 +1,13 @@
+---
+type Props = { title?: string };
+const { title = 'With real numbers' } = Astro.props;
+---
+
+<section class="my-8 overflow-hidden rounded-xl border border-rule">
+  <header class="border-b border-rule bg-sunk px-5 py-2.5">
+    <p class="label">{title}</p>
+  </header>
+  <div class="prose-lesson bg-raised px-5 py-4 text-[0.97em]">
+    <slot />
+  </div>
+</section>

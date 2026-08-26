@@ -1,0 +1,157 @@
+---
+import Shell from '../layouts/Shell.astro';
+import ProgressBar from '../components/ProgressBar.astro';
+import { ALL_LESSONS, SCHOOL, TOTAL_LESSONS, getLesson, sectionLabel } from '../lib/syllabus';
+import { getBookmark, getCompletedSlugs, getEnv, getShakyLessons, getWeekSummary } from '../lib/db';
+
+export const prerender = false;
+
+const learner = Astro.locals.learner!;
+const env = getEnv(Astro.locals);
+
+const [completed, bookmarkSlug, week, shaky] = await Promise.all([
+  getCompletedSlugs(env.DB, learner.id),
+  getBookmark(env.DB, learner.id),
+  getWeekSummary(env.DB, learner.id),
+  getShakyLessons(env.DB, learner.id, 4),
+]);
+
+const doneTotal = ALL_LESSONS.filter((lesson) => completed.has(lesson.slug)).length;
+const firstUnfinished = ALL_LESSONS.find((lesson) => !completed.has(lesson.slug)) ?? ALL_LESSONS[0];
+const bookmarked = bookmarkSlug ? getLesson(bookmarkSlug) : undefined;
+
+// If the bookmarked lesson is already finished, the useful next step is the one after it.
+const resume = bookmarked && !completed.has(bookmarked.slug) ? bookmarked : firstUnfinished;
+const resumeCourse = SCHOOL.find((course) => course.slug === resume.courseSlug)!;
+const resumeSection = resumeCourse.sections.find((section) => section.slug === resume.sectionSlug)!;
+
+const hour = new Date().getUTCHours();
+const greeting = hour < 11 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+
+const shakyLessons = shaky.map((slug) => getLesson(slug)).filter((lesson) => lesson !== undefined);
+const showRecap = week.lessonsFinished > 0 || week.questionsAnswered > 0;
+const scorePercent =
+  week.questionsAnswered > 0 ? Math.round((week.questionsCorrect / week.questionsAnswered) * 100) : 0;
+---
+
+<Shell title="Pip by Pip">
+  <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+    <p class="label">{greeting}, {learner.name}</p>
+
+    <h1 class="mt-2 text-[2rem] leading-tight font-semibold sm:text-[2.6rem]">
+      {doneTotal === 0 ? 'Let us begin at the beginning.' : 'Pick up where you left off.'}
+    </h1>
+
+    <a
+      href={resume.href}
+      class="pressable group mt-7 block rounded-2xl border border-rule bg-raised p-5 hover:border-ink-faint sm:p-6"
+    >
+      <p class="label">{doneTotal === 0 ? 'Your first lesson' : 'Next up'}</p>
+      <h2 class="mt-2 text-[1.45rem] leading-snug font-semibold sm:text-[1.7rem]">{resume.title}</h2>
+      <p class="mt-1.5 font-sans text-[0.82rem] text-ink-faint">
+        {resumeCourse.title} · {sectionLabel(resumeSection)}
+      </p>
+
+      <span
+        class="mt-5 inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 font-sans text-sm font-medium text-white transition-colors duration-200 group-hover:bg-accent-ink"
+      >
+        {doneTotal === 0 ? 'Start reading' : 'Continue reading'}
+        <svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </span>
+    </a>
+
+    <div class="mt-8 rounded-xl border border-rule p-4 sm:p-5">
+      <ProgressBar done={doneTotal} total={TOTAL_LESSONS} label="The whole school" />
+      <p class="mt-2 font-sans text-[0.78rem] text-ink-faint">
+        {
+          doneTotal === 0
+            ? 'Nothing finished yet. That is exactly where everyone starts.'
+            : `${TOTAL_LESSONS - doneTotal} lessons still ahead of you.`
+        }
+      </p>
+    </div>
+
+    {
+      showRecap && (
+        <section class="mt-8 rounded-xl border border-rule bg-sunk p-5">
+          <h2 class="label">Your last seven days</h2>
+          <div class="mt-3 flex flex-wrap gap-x-10 gap-y-4">
+            <div>
+              <p class="font-serif text-3xl tabular-nums">{week.lessonsFinished}</p>
+              <p class="font-sans text-[0.78rem] text-ink-faint">
+                {week.lessonsFinished === 1 ? 'lesson finished' : 'lessons finished'}
+              </p>
+            </div>
+            {week.questionsAnswered > 0 && (
+              <div>
+                <p class="font-serif text-3xl tabular-nums">{scorePercent}%</p>
+                <p class="font-sans text-[0.78rem] text-ink-faint">
+                  on {week.questionsAnswered} {week.questionsAnswered === 1 ? 'question' : 'questions'}
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      shakyLessons.length > 0 && (
+        <section class="mt-8">
+          <h2 class="label">Worth another look</h2>
+          <p class="mt-1 font-sans text-[0.82rem] text-ink-faint">
+            You missed a question in these. No shame in a second pass.
+          </p>
+          <ul class="mt-3 grid gap-2">
+            {shakyLessons.map((lesson) => (
+              <li>
+                <a
+                  href={lesson.href}
+                  class="pressable block rounded-lg border border-rule bg-raised px-4 py-2.5 font-sans text-[0.88rem] hover:border-ink-faint"
+                >
+                  {lesson.title}
+                  <span class="mt-0.5 block text-[0.75rem] text-ink-faint">{lesson.courseTitle}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <section class="mt-12">
+      <div class="flex items-baseline justify-between gap-4">
+        <h2 class="text-[1.35rem] font-semibold">The eleven courses</h2>
+        <a href="/courses" class="pressable shrink-0 font-sans text-[0.82rem] text-accent hover:underline">See all</a>
+      </div>
+
+      <ol class="mt-4 grid gap-2 sm:grid-cols-2">
+        {
+          SCHOOL.map((course) => {
+            const done = course.lessons.filter((lesson) => completed.has(lesson.slug)).length;
+            return (
+              <li>
+                <a
+                  href={course.href}
+                  class="pressable block h-full rounded-xl border border-rule bg-raised px-4 py-3 hover:border-ink-faint"
+                >
+                  <div class="flex items-baseline justify-between gap-2">
+                    <span class="font-sans text-[0.9rem] font-medium">{course.title}</span>
+                    <span class="shrink-0 font-sans text-[0.72rem] tabular-nums text-ink-faint">
+                      {done}/{course.lessonCount}
+                    </span>
+                  </div>
+                  <div class="mt-2">
+                    <ProgressBar done={done} total={course.lessonCount} compact />
+                  </div>
+                </a>
+              </li>
+            );
+          })
+        }
+      </ol>
+    </section>
+  </div>
+</Shell>

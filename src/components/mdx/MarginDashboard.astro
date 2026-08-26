@@ -1,0 +1,224 @@
+---
+type Props = {
+  balance?: number;
+  leverage?: number;
+  lots?: number;
+  move?: number;
+  caption?: string;
+};
+
+const {
+  balance = 1000,
+  leverage = 100,
+  lots = 0.1,
+  move = -30,
+  caption = 'Move the sliders. Watch what happens to the margin level when the trade goes against you.',
+} = Astro.props;
+
+const rows = [
+  { key: 'balance', label: 'Balance', hint: 'What you deposited, before this trade closes' },
+  { key: 'floating', label: 'Floating profit / loss', hint: 'The trade is still open, so this can still change' },
+  { key: 'equity', label: 'Equity', hint: 'Balance plus the floating profit or loss' },
+  { key: 'used', label: 'Used margin', hint: 'Locked as a deposit while the trade is open' },
+  { key: 'free', label: 'Free margin', hint: 'What is left to absorb further losses' },
+];
+---
+
+<figure class="my-8">
+  <div class="rounded-xl border border-rule bg-raised p-4 sm:p-6" data-margin>
+    <p class="label">Your account, live</p>
+
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      <label class="block">
+        <span class="flex items-baseline justify-between font-sans text-[0.8rem] text-ink-soft">
+          Deposit <span data-out="balance" class="tabular-nums text-ink">$1,000</span>
+        </span>
+        <input
+          type="range"
+          min="100"
+          max="10000"
+          step="100"
+          value={balance}
+          data-input="balance"
+          class="mt-1 w-full accent-[var(--color-accent)]"
+        />
+      </label>
+
+      <label class="block">
+        <span class="flex items-baseline justify-between font-sans text-[0.8rem] text-ink-soft">
+          Leverage <span data-out="leverage" class="tabular-nums text-ink">100:1</span>
+        </span>
+        <input
+          type="range"
+          min="1"
+          max="500"
+          step="1"
+          value={leverage}
+          data-input="leverage"
+          class="mt-1 w-full accent-[var(--color-accent)]"
+        />
+      </label>
+
+      <label class="block">
+        <span class="flex items-baseline justify-between font-sans text-[0.8rem] text-ink-soft">
+          Trade size <span data-out="lots" class="tabular-nums text-ink">0.10 lots</span>
+        </span>
+        <input
+          type="range"
+          min="0.01"
+          max="2"
+          step="0.01"
+          value={lots}
+          data-input="lots"
+          class="mt-1 w-full accent-[var(--color-accent)]"
+        />
+      </label>
+
+      <label class="block">
+        <span class="flex items-baseline justify-between font-sans text-[0.8rem] text-ink-soft">
+          Price move <span data-out="move" class="tabular-nums text-fall">-30 pips</span>
+        </span>
+        <input
+          type="range"
+          min="-200"
+          max="200"
+          step="5"
+          value={move}
+          data-input="move"
+          class="mt-1 w-full accent-[var(--color-accent)]"
+        />
+      </label>
+    </div>
+
+    <div class="mt-6 rounded-xl border border-rule bg-paper px-4 py-2">
+      {
+        rows.map((row, index) => (
+          <div
+            class:list={[
+              'flex items-start justify-between gap-4 py-2.5',
+              index === 0 ? '' : 'border-t border-rule-soft',
+            ]}
+          >
+            <div>
+              <p class="font-sans text-[0.85rem] font-medium text-ink">{row.label}</p>
+              <p class="font-sans text-[0.76rem] leading-snug text-ink-faint">{row.hint}</p>
+            </div>
+            <p data-out={row.key} class="shrink-0 font-sans text-[0.95rem] tabular-nums text-ink">
+              —
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-5">
+      <div class="flex items-baseline justify-between font-sans text-[0.8rem]">
+        <span class="text-ink-soft">Margin level</span>
+        <span data-out="level" class="tabular-nums text-ink">—</span>
+      </div>
+
+      <div class="relative mt-2 h-3 overflow-hidden rounded-full bg-sunk">
+        <div
+          data-meter
+          class="h-full rounded-full transition-[width,background-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]"
+          style="width:0%;background-color:var(--color-rise)"
+        >
+        </div>
+        <div class="absolute inset-y-0 w-px bg-fall/70" style="left:12.5%" aria-hidden="true"></div>
+        <div class="absolute inset-y-0 w-px bg-flag/70" style="left:25%" aria-hidden="true"></div>
+      </div>
+
+      <div class="relative mt-1 h-4 font-sans text-[0.68rem] text-ink-faint">
+        <span class="absolute -translate-x-1/2" style="left:12.5%">50% stop out</span>
+        <span class="absolute -translate-x-1/2" style="left:25%">100% margin call</span>
+      </div>
+
+      <p data-verdict class="mt-4 rounded-lg bg-accent-soft px-4 py-3 font-sans text-[0.85rem] leading-relaxed text-accent-ink">
+        Healthy. There is enough equity here to absorb the trade moving against you.
+      </p>
+    </div>
+  </div>
+  {caption && <figcaption class="mt-2.5 font-sans text-[0.8rem] leading-relaxed text-ink-faint">{caption}</figcaption>}
+</figure>
+
+<script>
+  const money = (value: number, exact = true) =>
+    value.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: exact ? 2 : 0,
+    });
+
+  document.querySelectorAll<HTMLElement>('[data-margin]').forEach((widget) => {
+    const input = (name: string) => widget.querySelector<HTMLInputElement>(`[data-input="${name}"]`)!;
+    const out = (name: string) => widget.querySelector<HTMLElement>(`[data-out="${name}"]`)!;
+
+    const meter = widget.querySelector<HTMLElement>('[data-meter]')!;
+    const verdict = widget.querySelector<HTMLElement>('[data-verdict]')!;
+
+    const inputs = ['balance', 'leverage', 'lots', 'move'].map(input);
+
+    function update() {
+      const balance = Number(input('balance').value);
+      const leverage = Number(input('leverage').value);
+      const lots = Number(input('lots').value);
+      const pips = Number(input('move').value);
+
+      // A standard lot is 100,000 units, priced against a USD quote, so one pip
+      // on one standard lot is worth exactly $10.
+      const notional = lots * 100_000 * 1.085;
+      const usedMargin = notional / leverage;
+      const floating = pips * 10 * lots;
+      const equity = balance + floating;
+      const freeMargin = equity - usedMargin;
+      const level = usedMargin > 0 ? (equity / usedMargin) * 100 : Infinity;
+
+      out('balance').textContent = money(balance, false);
+      out('leverage').textContent = `${leverage}:1`;
+      out('lots').textContent = `${lots.toFixed(2)} lots`;
+
+      const moveOut = out('move');
+      moveOut.textContent = `${pips > 0 ? '+' : ''}${pips} pips`;
+      moveOut.classList.toggle('text-fall', pips < 0);
+      moveOut.classList.toggle('text-rise', pips > 0);
+      moveOut.classList.toggle('text-ink', pips === 0);
+
+      const floatingOut = out('floating');
+      floatingOut.textContent = `${floating >= 0 ? '+' : ''}${money(floating)}`;
+      floatingOut.classList.toggle('text-fall', floating < 0);
+      floatingOut.classList.toggle('text-rise', floating > 0);
+
+      out('equity').textContent = money(equity);
+      out('used').textContent = money(usedMargin);
+
+      const freeOut = out('free');
+      freeOut.textContent = money(freeMargin);
+      freeOut.classList.toggle('text-fall', freeMargin < 0);
+
+      out('level').textContent = Number.isFinite(level) ? `${level.toFixed(0)}%` : '—';
+
+      const stopOut = level <= 50;
+      const marginCall = !stopOut && level <= 100;
+
+      meter.style.width = `${Math.max(0, Math.min(100, (level / 400) * 100))}%`;
+      meter.style.backgroundColor = stopOut
+        ? 'var(--color-fall)'
+        : marginCall
+          ? 'var(--color-flag)'
+          : 'var(--color-rise)';
+
+      verdict.className =
+        'mt-4 rounded-lg px-4 py-3 font-sans text-[0.85rem] leading-relaxed ' +
+        (stopOut ? 'bg-fall/12 text-fall' : marginCall ? 'bg-flag-soft text-flag' : 'bg-accent-soft text-accent-ink');
+
+      verdict.textContent = stopOut
+        ? 'Stopped out. Your broker has closed the trade for you, and the loss is now permanent. You did not get to decide.'
+        : marginCall
+          ? 'Margin call. Your broker is warning you: no new trades, and if it slips further they will close this one themselves.'
+          : 'Healthy. There is enough equity here to absorb the trade moving against you.';
+    }
+
+    inputs.forEach((element) => element.addEventListener('input', update));
+    update();
+  });
+</script>

@@ -1,0 +1,9 @@
+name = "pip-by-pip"
+compatibility_date = "2025-08-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "pip-by-pip"
+database_id = "local-placeholder-replaced-on-deploy"

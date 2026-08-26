@@ -1,0 +1,20 @@
+---
+type Props = {
+  kind?: 'note' | 'warning';
+  title?: string;
+};
+const { kind = 'note', title } = Astro.props;
+
+const tone =
+  kind === 'warning'
+    ? 'border-flag/40 bg-flag-soft'
+    : 'border-accent/25 bg-accent-soft';
+const label = title ?? (kind === 'warning' ? 'Careful' : 'Worth knowing');
+---
+
+<aside class:list={['my-8 rounded-xl border px-5 py-4', tone]}>
+  <p class:list={['label', kind === 'warning' ? 'text-flag' : 'text-accent-ink']}>{label}</p>
+  <div class="prose-lesson mt-1.5 text-[0.97em]">
+    <slot />
+  </div>
+</aside>

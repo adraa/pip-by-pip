@@ -1,0 +1,42 @@
+---
+type Props = {
+  base?: string;
+  quote?: string;
+  price?: string;
+  baseNote?: string;
+  quoteNote?: string;
+};
+
+const {
+  base = 'EUR',
+  quote = 'USD',
+  price = '1.0850',
+  baseNote = 'the one you are buying or selling',
+  quoteNote = 'what you are paying with',
+} = Astro.props;
+---
+
+<div class="flex flex-col items-center gap-6 py-2 text-center">
+  <div class="flex items-baseline gap-2 font-serif text-4xl sm:text-5xl">
+    <span class="font-semibold text-accent">{base}</span>
+    <span class="text-ink-faint">/</span>
+    <span class="font-semibold text-ink">{quote}</span>
+    <span class="ml-3 font-sans text-2xl tabular-nums text-ink-soft sm:text-3xl">{price}</span>
+  </div>
+
+  <div class="grid w-full max-w-lg grid-cols-2 gap-3 sm:gap-6">
+    <div class="rounded-lg border border-accent/25 bg-accent-soft px-3 py-2.5">
+      <p class="font-sans text-[0.7rem] font-semibold tracking-wide text-accent-ink uppercase">Base · {base}</p>
+      <p class="mt-1 font-sans text-[0.82rem] leading-snug text-ink-soft">{baseNote}</p>
+    </div>
+    <div class="rounded-lg border border-rule bg-sunk px-3 py-2.5">
+      <p class="font-sans text-[0.7rem] font-semibold tracking-wide text-ink-soft uppercase">Quote · {quote}</p>
+      <p class="mt-1 font-sans text-[0.82rem] leading-snug text-ink-soft">{quoteNote}</p>
+    </div>
+  </div>
+
+  <p class="max-w-md font-sans text-[0.85rem] leading-relaxed text-ink-faint">
+    One <strong class="font-semibold text-ink-soft">{base}</strong> costs
+    <strong class="font-semibold text-ink-soft">{price} {quote}</strong>.
+  </p>
+</div>

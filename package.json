@@ -1,0 +1,36 @@
+{
+  "name": "pip-by-pip",
+  "type": "module",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev --host --port 41720",
+    "build": "astro build",
+    "preview": "wrangler pages dev ./dist --port 41721",
+    "check": "astro check",
+    "codes": "node scripts/make-codes.mjs",
+    "db:local": "wrangler d1 execute pip-by-pip --local --file=./schema.sql",
+    "db:remote": "wrangler d1 execute pip-by-pip --remote --file=./schema.sql",
+    "db:seed:local": "wrangler d1 execute pip-by-pip --local --file=./seed.sql",
+    "db:seed:remote": "wrangler d1 execute pip-by-pip --remote --file=./seed.sql",
+    "setup": "npm run db:local && npm run codes && npm run db:seed:local",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.2.5",
+    "@astrojs/mdx": "^7.0.8",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.2.7",
+    "tailwindcss": "^4.3.3"
+  },
+  "allowScripts": {
+    "esbuild": true
+  },
+  "devDependencies": {
+    "wrangler": "^4.126.0"
+  }
+}

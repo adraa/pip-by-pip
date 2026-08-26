@@ -1,0 +1,113 @@
+---
+oneThing: Forex is simply swapping one country's money for another's, and it is the biggest market on earth.
+minutes: 4
+terms:
+  - term: Forex
+    plain: Short for "foreign exchange". Swapping one currency for another.
+  - term: Currency pair
+    plain: Two currencies quoted together, because you always give up one to get the other.
+  - term: Over-the-counter
+    plain: Traded directly between two parties instead of on a central exchange.
+quiz:
+  - question: What are you actually doing when you trade forex?
+    choices:
+      - Buying shares in a foreign company
+      - Swapping one country's money for another's
+      - Lending money to a government
+      - Betting on interest rates only
+    answer: 1
+    because: A forex trade is an exchange. You hand over one currency and receive another, exactly like a money changer, just much bigger and much faster.
+  - question: Roughly how much money changes hands in forex each day?
+    choices:
+      - About 75 billion dollars
+      - About 750 billion dollars
+      - About 7.5 trillion dollars
+      - About 75 trillion dollars
+    answer: 2
+    because: Around 7.5 trillion dollars a day. The world's stock markets together do a small fraction of that.
+  - question: Where is the forex market located?
+    choices:
+      - The New York Stock Exchange building
+      - A single exchange in London
+      - Nowhere in particular, it is a network of banks and brokers
+      - The Bank for International Settlements
+    answer: 2
+    because: There is no building. Forex is over-the-counter, meaning it is a web of banks, brokers and dealers trading directly with each other.
+  - question: Why can you never buy a currency on its own?
+    choices:
+      - Because brokers do not allow it
+      - Because a currency's price only exists relative to another currency
+      - Because of government rules
+      - Because currencies are always sold in pairs of ten
+    answer: 1
+    because: A price has to be in terms of something. "One euro costs 1.0850 dollars" needs both currencies, which is why forex is quoted in pairs.
+---
+
+You have already traded forex. If you have ever landed in another country and handed over your money at an exchange counter, you did a forex trade. You gave up one currency, you received another, and the rate on the board decided how much you got.
+
+That is genuinely all forex is. The professional version just involves much larger sums, much faster, and no queue.
+
+<Analogy>
+At the airport counter, a sign says the euro costs 1.09 dollars. You hand over 100 dollars and walk away with about 92 euros. If you come back next week and the euro costs 1.05 dollars, your 92 euros would buy back more than 100 dollars. You would have made money simply by holding euros while they got more expensive.
+
+That is a forex trade. Everything else in this course is detail on top of that idea.
+</Analogy>
+
+## Currencies always come in pairs
+
+Here is the first thing that trips people up. You cannot buy "the euro" on its own, because a price has to be measured in something.
+
+Ask "how much is a euro?" and the only sensible answer is "in terms of what?" A euro costs about 1.08 US dollars, or about 0.86 British pounds, or about 165 Japanese yen. Three different prices for the same currency, all correct at the same time.
+
+So currencies are always quoted two at a time.
+
+<Figure caption="The first currency is the one being priced. The second is the money you are pricing it in.">
+  <PairAnatomy
+    base="EUR"
+    quote="USD"
+    price="1.0850"
+    baseNote="the currency you are buying or selling"
+    quoteNote="the money the price is measured in"
+  />
+</Figure>
+
+Read it out loud as a sentence: **one euro costs 1.0850 US dollars**. When that number rises to 1.0900, the euro has got more expensive. When it falls to 1.0800, the euro has got cheaper and the dollar has got stronger.
+
+<Callout>
+Every price you will ever see on a forex chart is answering the same question: how much of the second currency does one unit of the first currency cost?
+</Callout>
+
+## It is enormous
+
+Forex is not a niche corner of finance. It is the largest financial market in the world, by a distance that is hard to picture.
+
+<Figure caption="Average money changing hands each day, in US dollars. Forex is not slightly bigger than the stock market. It is a different order of magnitude.">
+  <BarCompare
+    unit="billion / day"
+    items={[
+      { label: 'Forex', value: 7500, note: 'Around 7.5 trillion dollars every single day', highlight: true },
+      { label: 'World stock markets', value: 600 },
+      { label: 'New York Stock Exchange', value: 200 },
+    ]}
+  />
+</Figure>
+
+Size matters to you for one practical reason: **you can almost always get in and out**. In a small market, wanting to sell when nobody wants to buy is a real problem. In forex, at any normal hour, there is someone on the other side.
+
+## There is no building
+
+Ask where the stock market is and someone can point at a building. Ask where the forex market is and there is no answer, because it does not sit anywhere.
+
+Forex is **over-the-counter**. It is a network: banks quoting prices to each other, brokers quoting prices to customers, all connected by screens. No trading floor, no bell, no single official price.
+
+<Callout kind="warning" title="One consequence to remember">
+Because there is no central exchange, there is no single official price. Two brokers can show you slightly different prices for the same pair at the same moment. They are usually close, but they are not identical.
+</Callout>
+
+## Why anyone bothers
+
+Most of that 7.5 trillion has nothing to do with trading for profit. A German company selling machinery to America gets paid in dollars and needs euros to pay its staff. A tourist needs baht. A pension fund buying Japanese shares needs yen first.
+
+All that ordinary business creates constant demand to swap currencies. Traders like us are a small passenger on a very large ship, trying to profit from where it drifts.
+
+That is the whole picture. Money, swapped for other money, endlessly, all over the world. From here we start filling in how you actually do it.

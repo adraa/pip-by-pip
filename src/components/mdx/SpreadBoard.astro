@@ -1,0 +1,41 @@
+---
+type Props = {
+  pair?: string;
+  bid?: string;
+  ask?: string;
+  spread?: string;
+};
+
+const { pair = 'EUR/USD', bid = '1.08500', ask = '1.08512', spread = '1.2 pips' } = Astro.props;
+---
+
+<div class="py-1">
+  <p class="label text-center">{pair}</p>
+
+  <div class="mt-4 grid grid-cols-[1fr_auto_1fr] items-stretch gap-2 sm:gap-4">
+    <div class="rounded-xl border border-fall/30 bg-fall/8 px-3 py-4 text-center">
+      <p class="font-sans text-[0.7rem] font-semibold tracking-wide text-fall uppercase">Bid</p>
+      <p class="mt-1 font-sans text-xl tabular-nums text-ink sm:text-2xl">{bid}</p>
+      <p class="mt-1.5 font-sans text-[0.76rem] leading-snug text-ink-faint">what you get if you sell</p>
+    </div>
+
+    <div class="flex flex-col items-center justify-center px-1">
+      <div class="h-full w-px bg-rule"></div>
+      <span
+        class="my-1 rounded-full border border-rule bg-raised px-2 py-0.5 font-sans text-[0.7rem] whitespace-nowrap text-ink-soft"
+        >{spread}</span
+      >
+      <div class="h-full w-px bg-rule"></div>
+    </div>
+
+    <div class="rounded-xl border border-rise/30 bg-rise/8 px-3 py-4 text-center">
+      <p class="font-sans text-[0.7rem] font-semibold tracking-wide text-rise uppercase">Ask</p>
+      <p class="mt-1 font-sans text-xl tabular-nums text-ink sm:text-2xl">{ask}</p>
+      <p class="mt-1.5 font-sans text-[0.76rem] leading-snug text-ink-faint">what you pay if you buy</p>
+    </div>
+  </div>
+
+  <p class="mt-4 text-center font-sans text-[0.82rem] text-ink-faint">
+    The gap between the two is the spread. It is the cost of the trade, paid the moment you enter.
+  </p>
+</div>

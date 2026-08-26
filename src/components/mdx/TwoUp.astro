@@ -1,0 +1,29 @@
+---
+type Column = { title: string; points: string[]; tone?: 'good' | 'bad' | 'plain' };
+type Props = { left: Column; right: Column };
+const { left, right } = Astro.props;
+
+const toneClasses = {
+  good: 'border-rise/30 bg-rise/6',
+  bad: 'border-fall/30 bg-fall/6',
+  plain: 'border-rule bg-sunk',
+};
+---
+
+<div class="my-8 grid gap-3 sm:grid-cols-2">
+  {
+    [left, right].map((column) => (
+      <div class:list={['rounded-xl border px-4 py-4', toneClasses[column.tone ?? 'plain']]}>
+        <p class="font-sans text-[0.85rem] font-semibold text-ink">{column.title}</p>
+        <ul class="mt-2 grid gap-1.5">
+          {column.points.map((point) => (
+            <li class="flex gap-2 font-sans text-[0.82rem] leading-snug text-ink-soft">
+              <span class="mt-[0.42em] size-1 shrink-0 rounded-full bg-ink-faint" aria-hidden="true" />
+              {point}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</div>

@@ -1,0 +1,31 @@
+---
+---
+
+<button
+  type="button"
+  id="theme-toggle"
+  class="pressable inline-flex size-9 items-center justify-center rounded-full border border-rule text-ink-soft hover:border-ink-faint hover:text-ink"
+  aria-label="Switch between light and dark"
+>
+  <svg viewBox="0 0 20 20" class="size-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5">
+    <g class="hidden [:root[data-theme='light']_&]:block">
+      <circle cx="10" cy="10" r="3.6" />
+      <path stroke-linecap="round" d="M10 2.2v1.6M10 16.2v1.6M17.8 10h-1.6M3.8 10H2.2M15.5 4.5l-1.1 1.1M5.6 14.4l-1.1 1.1M15.5 15.5l-1.1-1.1M5.6 5.6L4.5 4.5" />
+    </g>
+    <path
+      class="hidden [:root[data-theme='dark']_&]:block"
+      stroke-linejoin="round"
+      d="M16.2 12.4A6.8 6.8 0 0 1 7.6 3.8a6.8 6.8 0 1 0 8.6 8.6Z"
+    />
+  </svg>
+</button>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  toggle?.addEventListener('click', () => {
+    const root = document.documentElement;
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    localStorage.setItem('pbp-theme', next);
+  });
+</script>

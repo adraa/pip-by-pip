@@ -1,0 +1,17 @@
+---
+type Props = { title?: string };
+const { title = 'Think of it like this' } = Astro.props;
+---
+
+<aside class="my-8 rounded-xl border border-rule bg-sunk px-5 py-4">
+  <p class="label flex items-center gap-1.5">
+    <svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+      <path d="M8 1.8a4.2 4.2 0 0 0-2.5 7.6c.4.3.6.8.6 1.3v.3h3.8v-.3c0-.5.2-1 .6-1.3A4.2 4.2 0 0 0 8 1.8Z" />
+      <path d="M6.3 13.2h3.4M7 14.6h2" stroke-linecap="round" />
+    </svg>
+    {title}
+  </p>
+  <div class="prose-lesson mt-2 text-[0.97em] text-ink-soft">
+    <slot />
+  </div>
+</aside>

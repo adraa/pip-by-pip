@@ -1,0 +1,67 @@
+---
+import Shell from '../layouts/Shell.astro';
+import ProgressBar from '../components/ProgressBar.astro';
+import { SCHOOL, TOTAL_LESSONS } from '../lib/syllabus';
+import { getCompletedSlugs, getEnv } from '../lib/db';
+
+export const prerender = false;
+
+const learner = Astro.locals.learner!;
+const env = getEnv(Astro.locals);
+const completed = await getCompletedSlugs(env.DB, learner.id);
+const doneTotal = SCHOOL.reduce(
+  (sum, course) => sum + course.lessons.filter((lesson) => completed.has(lesson.slug)).length,
+  0,
+);
+---
+
+<Shell title="Courses">
+  <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+    <h1 class="text-[2rem] leading-tight font-semibold sm:text-[2.6rem]">The whole school</h1>
+    <p class="measure mt-3 text-ink-soft">
+      Eleven courses, {TOTAL_LESSONS} lessons, in exactly the order BabyPips teaches them. Start at the top and walk down.
+    </p>
+
+    <div class="mt-6 max-w-sm">
+      <ProgressBar done={doneTotal} total={TOTAL_LESSONS} label="Finished so far" />
+    </div>
+
+    <ol class="mt-10 grid gap-3">
+      {
+        SCHOOL.map((course) => {
+          const done = course.lessons.filter((lesson) => completed.has(lesson.slug)).length;
+          const complete = done === course.lessonCount;
+          return (
+            <li>
+              <a
+                href={course.href}
+                class="pressable group block rounded-xl border border-rule bg-raised p-4 hover:border-ink-faint sm:p-5"
+              >
+                <div class="flex items-baseline gap-3">
+                  <span class="font-sans text-[0.7rem] font-semibold tabular-nums text-ink-faint">
+                    {String(course.number).padStart(2, '0')}
+                  </span>
+                  <h2 class="flex-1 text-[1.2rem] font-semibold">{course.title}</h2>
+                  {complete && (
+                    <span class="shrink-0 rounded-full bg-rise/12 px-2 py-0.5 font-sans text-[0.68rem] font-medium text-rise">
+                      done
+                    </span>
+                  )}
+                </div>
+
+                <p class="measure mt-1.5 pl-[1.85rem] text-[0.95em] leading-relaxed text-ink-soft">{course.blurb}</p>
+
+                <div class="mt-3.5 pl-[1.85rem]">
+                  <ProgressBar done={done} total={course.lessonCount} compact />
+                  <p class="mt-1.5 font-sans text-[0.74rem] tabular-nums text-ink-faint">
+                    {done} of {course.lessonCount} lessons
+                  </p>
+                </div>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ol>
+  </div>
+</Shell>

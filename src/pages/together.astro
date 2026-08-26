@@ -1,0 +1,98 @@
+---
+import Shell from '../layouts/Shell.astro';
+import ProgressBar from '../components/ProgressBar.astro';
+import { ALL_LESSONS, SCHOOL, TOTAL_LESSONS, getLesson } from '../lib/syllabus';
+import { getBookmark, getCompletedSlugs, getEnv, listLearners } from '../lib/db';
+
+export const prerender = false;
+
+const env = getEnv(Astro.locals);
+const learners = await listLearners(env.DB);
+
+const rows = await Promise.all(
+  learners.map(async (person) => {
+    const completed = await getCompletedSlugs(env.DB, person.id);
+    const bookmark = await getBookmark(env.DB, person.id);
+    const current = bookmark ? getLesson(bookmark) : undefined;
+    return {
+      person,
+      completed,
+      done: ALL_LESSONS.filter((lesson) => completed.has(lesson.slug)).length,
+      current,
+    };
+  }),
+);
+
+rows.sort((a, b) => b.done - a.done);
+const leader = rows[0];
+const gap = rows.length > 1 ? leader.done - rows[rows.length - 1].done : 0;
+---
+
+<Shell title="Together">
+  <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+    <h1 class="text-[2rem] leading-tight font-semibold sm:text-[2.6rem]">Where you both are</h1>
+    <p class="measure mt-3 text-ink-soft">
+      {
+        rows.length < 2
+          ? 'Once there is more than one of you signed up, this page shows both of you side by side.'
+          : gap === 0
+            ? 'Dead level. Not a single lesson between you.'
+            : `${leader.person.name} is ${gap} ${gap === 1 ? 'lesson' : 'lessons'} ahead.`
+      }
+    </p>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      {
+        rows.map((row) => (
+          <section class="rounded-2xl border border-rule bg-raised p-5">
+            <h2 class="text-[1.25rem] font-semibold">{row.person.name}</h2>
+
+            <p class="mt-1 font-serif text-4xl tabular-nums text-accent">{row.done}</p>
+            <p class="font-sans text-[0.78rem] text-ink-faint">of {TOTAL_LESSONS} lessons</p>
+
+            <div class="mt-4">
+              <ProgressBar done={row.done} total={TOTAL_LESSONS} compact />
+            </div>
+
+            {row.current && (
+              <p class="mt-4 border-t border-rule-soft pt-3 font-sans text-[0.82rem] leading-snug text-ink-soft">
+                <span class="text-ink-faint">Last opened </span>
+                {row.current.title}
+              </p>
+            )}
+          </section>
+        ))
+      }
+    </div>
+
+    <section class="mt-12">
+      <h2 class="label">Course by course</h2>
+      <div class="mt-4 overflow-hidden rounded-xl border border-rule bg-raised">
+        {
+          SCHOOL.map((course, index) => (
+            <div class:list={['px-4 py-3', index === 0 ? '' : 'border-t border-rule-soft']}>
+              <p class="font-sans text-[0.88rem]">{course.title}</p>
+
+              <div class="mt-2 grid gap-1.5">
+                {rows.map((row) => {
+                  const done = course.lessons.filter((lesson) => row.completed.has(lesson.slug)).length;
+                  return (
+                    <div class="grid grid-cols-[4.5rem_1fr_2.5rem] items-center gap-2">
+                      <span class="truncate font-sans text-[0.72rem] text-ink-faint">
+                        {row.person.name.split(' ')[0]}
+                      </span>
+                      <ProgressBar done={done} total={course.lessonCount} compact />
+                      <span class="text-right font-sans text-[0.7rem] tabular-nums text-ink-faint">
+                        {done}/{course.lessonCount}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</Shell>

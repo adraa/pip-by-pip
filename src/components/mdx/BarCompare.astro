@@ -1,0 +1,36 @@
+---
+type Item = { label: string; value: number; note?: string; highlight?: boolean };
+
+type Props = {
+  items: Item[];
+  /** Printed after each value, e.g. "trillion a day". */
+  unit?: string;
+};
+
+const { items, unit = '' } = Astro.props;
+const max = Math.max(...items.map((item) => item.value));
+---
+
+<div class="grid gap-3 py-1">
+  {
+    items.map((item) => (
+      <div>
+        <div class="flex items-baseline justify-between gap-3 font-sans">
+          <span class:list={['text-[0.85rem]', item.highlight ? 'font-semibold text-ink' : 'text-ink-soft']}>
+            {item.label}
+          </span>
+          <span class="text-[0.8rem] tabular-nums text-ink-faint">
+            {item.value.toLocaleString('en-US')} {unit}
+          </span>
+        </div>
+        <div class="mt-1.5 h-2.5 w-full overflow-hidden rounded-full bg-sunk">
+          <div
+            class:list={['h-full rounded-full', item.highlight ? 'bg-accent' : 'bg-ink-faint/45']}
+            style={`width: ${Math.max((item.value / max) * 100, 0.6)}%`}
+          />
+        </div>
+        {item.note && <p class="mt-1 font-sans text-[0.78rem] text-ink-faint">{item.note}</p>}
+      </div>
+    ))
+  }
+</div>

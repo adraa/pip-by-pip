@@ -1,0 +1,26 @@
+---
+type Tier = { label: string; note: string };
+type Props = { tiers: Tier[]; topNote?: string; bottomNote?: string };
+const { tiers, topNote = 'Best prices', bottomNote = 'Worst prices' } = Astro.props;
+---
+
+<div class="py-1">
+  <p class="label text-center">{topNote}</p>
+  <div class="mt-3 grid gap-1.5">
+    {
+      tiers.map((tier, index) => {
+        const inset = index * 6;
+        return (
+          <div
+            class="rounded-lg border border-rule bg-sunk px-4 py-3"
+            style={`margin-left:${inset}px;margin-right:${inset}px`}
+          >
+            <p class="font-sans text-[0.85rem] font-semibold text-ink">{tier.label}</p>
+            <p class="mt-0.5 font-sans text-[0.78rem] leading-snug text-ink-faint">{tier.note}</p>
+          </div>
+        );
+      })
+    }
+  </div>
+  <p class="label mt-3 text-center">{bottomNote}</p>
+</div>

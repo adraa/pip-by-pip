@@ -1,0 +1,67 @@
+---
+import Shell from '../layouts/Shell.astro';
+import Wordmark from '../components/Wordmark.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+const failed = Astro.url.searchParams.get('error') === '1';
+const next = Astro.url.searchParams.get('next') ?? '';
+---
+
+<Shell title="Pip by Pip" bare>
+  <div class="mx-auto flex min-h-dvh max-w-md flex-col justify-center px-6 py-12">
+    <div class="absolute top-4 right-4">
+      <ThemeToggle />
+    </div>
+
+    <div class="rise-in">
+      <Wordmark size="lg" />
+      <p class="measure mt-4 text-ink-soft">
+        The BabyPips School of Pipsology, rewritten in plain English with pictures. All 456 lessons, one small step at a
+        time.
+      </p>
+
+      <form method="post" action="/api/enter" class="mt-9">
+        {next && <input type="hidden" name="next" value={next} />}
+        <label for="code" class="label block">Your code</label>
+        <input
+          id="code"
+          name="code"
+          type="text"
+          autocomplete="off"
+          autocapitalize="none"
+          autocorrect="off"
+          spellcheck="false"
+          required
+          autofocus
+          placeholder="two words and a number"
+          aria-describedby={failed ? 'code-error' : undefined}
+          class:list={[
+            'mt-2 w-full rounded-xl border bg-raised px-4 py-3 font-sans text-base tracking-wide',
+            'placeholder:text-ink-faint/70 transition-colors duration-200',
+            failed ? 'border-fall' : 'border-rule focus:border-accent',
+          ]}
+        />
+
+        {
+          failed && (
+            <p id="code-error" class="rise-in mt-2 font-sans text-sm text-fall">
+              That code did not match. Check for a typo, or use your recovery code.
+            </p>
+          )
+        }
+
+        <button
+          type="submit"
+          class="pressable mt-4 w-full rounded-xl bg-accent px-4 py-3 font-sans text-base font-medium text-white hover:bg-accent-ink"
+        >
+          Start reading
+        </button>
+      </form>
+
+      <p class="mt-8 font-sans text-xs leading-relaxed text-ink-faint">
+        This site is private. Capital letters, spaces and dashes do not matter, so
+        <span class="text-ink-soft">Amber Lantern 42</span> and <span class="text-ink-soft">amber-lantern-42</span> both work.
+      </p>
+    </div>
+  </div>
+</Shell>

@@ -1,0 +1,64 @@
+---
+import type { Course, Lesson, Section } from '../lib/syllabus';
+import { sectionLabel } from '../lib/syllabus';
+import ThemeToggle from './ThemeToggle.astro';
+
+type Props = {
+  course: Course;
+  section: Section;
+  lesson: Lesson;
+  positionInCourse: number;
+};
+
+const { course, section, lesson, positionInCourse } = Astro.props;
+---
+
+<div class="sticky top-0 z-40 border-b border-rule bg-paper/88 backdrop-blur-md">
+  <div class="mx-auto flex h-13 max-w-3xl items-center gap-3 px-4 py-2.5 sm:px-6">
+    <a
+      href={course.href}
+      class="pressable -ml-1.5 flex shrink-0 items-center gap-1 rounded-md px-1.5 py-1 font-sans text-[0.8rem] text-ink-soft hover:text-ink"
+    >
+      <svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+        <path d="M9.5 3.5 5 8l4.5 4.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      <span class="hidden sm:inline">{course.title}</span>
+      <span class="sm:hidden">Back</span>
+    </a>
+
+    <p class="min-w-0 flex-1 truncate text-center font-sans text-[0.78rem] text-ink-faint">
+      {sectionLabel(section)}
+    </p>
+
+    <div class="flex shrink-0 items-center gap-2">
+      <span class="font-sans text-[0.75rem] tabular-nums text-ink-faint">
+        {positionInCourse}<span class="opacity-60">/{course.lessonCount}</span>
+      </span>
+      <ThemeToggle />
+    </div>
+  </div>
+
+  <div class="h-px w-full bg-rule">
+    <div id="read-progress" class="h-px w-0 bg-accent"></div>
+  </div>
+</div>
+
+<style>
+  @supports (animation-timeline: scroll()) {
+    #read-progress {
+      width: 100%;
+      transform-origin: 0 50%;
+      animation: read-progress linear;
+      animation-timeline: scroll();
+    }
+
+    @keyframes read-progress {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+  }
+</style>

@@ -1,0 +1,15 @@
+---
+type Props = { size?: 'sm' | 'lg' };
+const { size = 'sm' } = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-flex items-baseline gap-1.5 font-serif tracking-tight',
+    size === 'sm' ? 'text-[1.0625rem]' : 'text-3xl sm:text-4xl',
+  ]}
+>
+  <span class="font-semibold text-ink">Pip</span>
+  <span class="text-ink-faint italic">by</span>
+  <span class="font-semibold text-accent">Pip</span>
+</span>

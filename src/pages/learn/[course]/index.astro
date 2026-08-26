@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import Shell from '../../../layouts/Shell.astro';
+import ProgressBar from '../../../components/ProgressBar.astro';
+import { getCourse, sectionLabel } from '../../../lib/syllabus';
+import { getCompletedSlugs, getEnv } from '../../../lib/db';
+
+export const prerender = false;
+
+const course = Astro.params.course ? getCourse(Astro.params.course) : undefined;
+if (!course) return Astro.rewrite('/404');
+
+const learner = Astro.locals.learner!;
+const env = getEnv(Astro.locals);
+const completed = await getCompletedSlugs(env.DB, learner.id);
+
+const written = new Set((await getCollection('lessons')).map((entry) => entry.id));
+const doneInCourse = course.lessons.filter((lesson) => completed.has(lesson.slug)).length;
+const nextUp = course.lessons.find((lesson) => !completed.has(lesson.slug)) ?? course.lessons[0];
+---
+
+<Shell title={course.title} description={course.blurb}>
+  <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+    <p class="label">Course {course.number} of 11</p>
+    <h1 class="mt-2 text-[2rem] leading-tight font-semibold sm:text-[2.6rem]">{course.title}</h1>
+    <p class="measure mt-3 text-ink-soft">{course.blurb}</p>
+
+    <div class="mt-7 rounded-xl border border-rule bg-raised p-4 sm:p-5">
+      <ProgressBar done={doneInCourse} total={course.lessonCount} label="Lessons finished" />
+      <a
+        href={nextUp.href}
+        class="pressable mt-4 flex items-center justify-between gap-3 rounded-lg bg-accent px-4 py-2.5 font-sans text-sm font-medium text-white hover:bg-accent-ink"
+      >
+        <span class="truncate">
+          <span class="opacity-70">{doneInCourse === 0 ? 'Start with: ' : 'Continue: '}</span>
+          {nextUp.title}
+        </span>
+        <svg viewBox="0 0 16 16" class="size-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </div>
+
+    <div class="mt-12 grid gap-10">
+      {
+        course.sections.map((section) => {
+          const sectionDone = section.lessons.filter((lesson) => completed.has(lesson.slug)).length;
+          return (
+            <section>
+              <div class="flex items-baseline justify-between gap-4">
+                <h2 class="text-[1.35rem] font-semibold">{sectionLabel(section)}</h2>
+                <span class="shrink-0 font-sans text-[0.76rem] tabular-nums text-ink-faint">
+                  {sectionDone}/{section.lessons.length}
+                </span>
+              </div>
+              {section.blurb && <p class="measure mt-1.5 text-[0.97em] text-ink-soft">{section.blurb}</p>}
+
+              <ol class="mt-4 overflow-hidden rounded-xl border border-rule bg-raised">
+                {section.lessons.map((lesson, index) => {
+                  const isDone = completed.has(lesson.slug);
+                  const isWritten = written.has(`${course.slug}/${lesson.slug}`);
+                  return (
+                    <li class={index === 0 ? '' : 'border-t border-rule-soft'}>
+                      <a
+                        href={lesson.href}
+                        class="pressable flex items-center gap-3 px-4 py-3 hover:bg-sunk"
+                      >
+                        <span
+                          class:list={[
+                            'flex size-5 shrink-0 items-center justify-center rounded-full border',
+                            isDone ? 'border-rise bg-rise text-white' : 'border-rule',
+                          ]}
+                          aria-hidden="true"
+                        >
+                          {isDone && (
+                            <svg viewBox="0 0 12 12" class="size-3" fill="none" stroke="currentColor" stroke-width="2.2">
+                              <path d="M2.5 6.3 4.8 8.6 9.5 3.9" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                          )}
+                        </span>
+
+                        <span
+                          class:list={[
+                            'min-w-0 flex-1 font-sans text-[0.9rem] leading-snug',
+                            isDone ? 'text-ink-faint' : 'text-ink',
+                          ]}
+                        >
+                          {lesson.title}
+                        </span>
+
+                        {!isWritten && (
+                          <span class="shrink-0 rounded-full border border-rule px-2 py-0.5 font-sans text-[0.66rem] text-ink-faint">
+                            soon
+                          </span>
+                        )}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ol>
+            </section>
+          );
+        })
+      }
+    </div>
+  </div>
+</Shell>

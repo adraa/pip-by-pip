@@ -1,0 +1,24 @@
+---
+type Props = {
+  caption?: string;
+  /** Tighter framing for small diagrams that do not need a full panel. */
+  plain?: boolean;
+};
+const { caption, plain = false } = Astro.props;
+---
+
+<figure class="my-8">
+  <div
+    class:list={[
+      'overflow-hidden rounded-xl',
+      plain ? '' : 'border border-rule bg-raised p-4 sm:p-6',
+    ]}
+  >
+    <slot />
+  </div>
+  {
+    caption && (
+      <figcaption class="mt-2.5 font-sans text-[0.8rem] leading-relaxed text-ink-faint">{caption}</figcaption>
+    )
+  }
+</figure>

@@ -1,0 +1,92 @@
+---
+type Props = {
+  lesson: string;
+  complete: boolean;
+  nextHref: string | null;
+  nextTitle: string | null;
+};
+
+const { lesson, complete, nextHref, nextTitle } = Astro.props;
+---
+
+<div class="mt-10 flex flex-col gap-3 border-t border-rule pt-6 sm:flex-row sm:items-center">
+  <button
+    type="button"
+    data-finish
+    data-lesson={lesson}
+    aria-pressed={complete ? 'true' : 'false'}
+    class:list={[
+      'pressable inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-2.5 font-sans text-sm font-medium',
+      complete ? 'border-rise bg-rise/10 text-rise' : 'border-rule text-ink-soft hover:border-ink-faint hover:text-ink',
+    ]}
+  >
+    <span
+      data-tick
+      class:list={[
+        'inline-flex size-4 items-center justify-center rounded-full border transition-colors duration-200',
+        complete ? 'border-rise bg-rise text-white' : 'border-ink-faint',
+      ]}
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 12 12" class="size-2.5" fill="none" stroke="currentColor" stroke-width="2.2" hidden={!complete}>
+        <path d="M2.5 6.3 4.8 8.6 9.5 3.9" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </span>
+    <span data-finish-label>{complete ? 'Finished' : 'Mark as finished'}</span>
+  </button>
+
+  {
+    nextHref && (
+      <a
+        href={nextHref}
+        class="pressable inline-flex flex-1 items-center justify-between gap-3 rounded-xl bg-accent px-4 py-2.5 font-sans text-sm font-medium text-white hover:bg-accent-ink"
+      >
+        <span class="truncate">
+          <span class="opacity-70">Next: </span>
+          {nextTitle}
+        </span>
+        <svg viewBox="0 0 16 16" class="size-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    )
+  }
+</div>
+
+<script>
+  const DONE = ['border-rise', 'bg-rise/10', 'text-rise'];
+  const NOT_DONE = ['border-rule', 'text-ink-soft', 'hover:border-ink-faint', 'hover:text-ink'];
+
+  document.querySelectorAll<HTMLButtonElement>('[data-finish]').forEach((button) => {
+    const tick = button.querySelector<HTMLElement>('[data-tick]')!;
+    const check = tick.querySelector('svg')!;
+    const label = button.querySelector<HTMLElement>('[data-finish-label]')!;
+
+    function paint(done: boolean) {
+      button.setAttribute('aria-pressed', String(done));
+      button.classList.remove(...(done ? NOT_DONE : DONE));
+      button.classList.add(...(done ? DONE : NOT_DONE));
+      tick.classList.toggle('border-rise', done);
+      tick.classList.toggle('bg-rise', done);
+      tick.classList.toggle('text-white', done);
+      tick.classList.toggle('border-ink-faint', !done);
+      check.hidden = !done;
+      label.textContent = done ? 'Finished' : 'Mark as finished';
+    }
+
+    button.addEventListener('click', async () => {
+      const done = button.getAttribute('aria-pressed') !== 'true';
+      paint(done);
+
+      try {
+        await fetch('/api/progress', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ lesson: button.dataset.lesson, complete: done }),
+        });
+      } catch {
+        paint(!done);
+      }
+    });
+  });
+</script>

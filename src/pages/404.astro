@@ -1,0 +1,19 @@
+---
+import Shell from '../layouts/Shell.astro';
+---
+
+<Shell title="Not found">
+  <div class="mx-auto max-w-3xl px-4 py-24 sm:px-6">
+    <p class="label">Nothing here</p>
+    <h1 class="mt-2 text-[2rem] font-semibold sm:text-[2.6rem]">That page does not exist.</h1>
+    <p class="measure mt-3 text-ink-soft">
+      Probably a mistyped address. Every lesson lives under the course it belongs to.
+    </p>
+    <a
+      href="/courses"
+      class="pressable mt-6 inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 font-sans text-sm font-medium text-white hover:bg-accent-ink"
+    >
+      Back to the courses
+    </a>
+  </div>
+</Shell>

@@ -1,0 +1,48 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+type Props = {
+  title: string;
+  description?: string;
+  /** Reading pages hide the full header in favour of a slim lesson bar. */
+  bare?: boolean;
+};
+
+const { title, description = 'A plain-English, picture-first way through the BabyPips School of Pipsology.', bare = false } = Astro.props;
+const learner = Astro.locals.learner;
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#fcfaf6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title === 'Pip by Pip' ? title : `${title} · Pip by Pip`}</title>
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem('pbp-theme');
+        const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = stored || preferred;
+      })();
+    </script>
+  </head>
+  <body class="min-h-dvh flex flex-col">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-raised focus:px-3 focus:py-2 focus:shadow-lg"
+      >Skip to content</a
+    >
+    {!bare && <SiteHeader learner={learner} />}
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>
