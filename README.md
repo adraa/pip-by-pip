@@ -42,32 +42,21 @@ same code. A third `Recovery` code is always generated as a way back in if a cod
 
 ## Deploying to Cloudflare
 
-1. Create the database, once:
+The app is a Cloudflare Worker (Astro SSR + static assets) with a D1 database named `pip-by-pip`. `wrangler.toml` already has the database id.
 
-   ```bash
-   npx wrangler d1 create pip-by-pip
-   ```
+From a machine that is logged in to Wrangler (`npx wrangler login`, or `CLOUDFLARE_API_TOKEN` plus `CLOUDFLARE_ACCOUNT_ID`):
 
-   Put the returned `database_id` into `wrangler.toml`.
+```bash
+npx wrangler d1 execute pip-by-pip --remote --file=./schema.sql
+npx wrangler d1 execute pip-by-pip --remote --file=./scripts/seed-learners.sql
+npx wrangler secret put AUTH_SALT
+npx wrangler secret put SESSION_SECRET
+npm run deploy
+```
 
-2. Create the schema and load the codes:
+`AUTH_SALT` must match the salt used for the hashes in `scripts/seed-learners.sql` (the local default is `pip-by-pip-dev-salt`). Without those secrets the Worker falls back to development defaults, which is not fine in production.
 
-   ```bash
-   npm run db:remote
-   npm run db:seed:remote
-   ```
-
-3. Set the two secrets. `AUTH_SALT` must match the one used when generating codes:
-
-   ```bash
-   npx wrangler pages secret put AUTH_SALT
-   npx wrangler pages secret put SESSION_SECRET
-   ```
-
-4. Connect the GitHub repository in the Cloudflare dashboard (Workers & Pages, then Pages). Build command
-   `npm run build`, output directory `dist`. Every push to `main` then deploys automatically.
-
-Without those secrets the app falls back to development defaults, which is fine locally and not fine in production.
+CI: connect the GitHub repo to Workers Builds. Build command `npm run build`, deploy command `npx wrangler deploy`.
 
 ## How the content is organised
 
@@ -84,5 +73,5 @@ Lessons that have not been written yet still appear in the navigation and link t
 
 ## Stack
 
-Astro on Cloudflare Pages, Cloudflare D1 for progress, Tailwind for styling, and no UI framework. The interactive
+Astro on Cloudflare Workers, Cloudflare D1 for progress, Tailwind for styling, and no UI framework. The interactive
 widgets are plain JavaScript, which keeps a lesson page light on a phone.

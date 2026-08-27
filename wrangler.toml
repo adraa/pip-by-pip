@@ -1,9 +1,16 @@
 name = "pip-by-pip"
-compatibility_date = "2025-08-01"
+compatibility_date = "2026-08-12"
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = "dist"
+main = "dist/_worker.js/index.js"
+
+[assets]
+binding = "ASSETS"
+directory = "./dist"
+
+[observability]
+enabled = true
 
 [[d1_databases]]
 binding = "DB"
 database_name = "pip-by-pip"
-database_id = "local-placeholder-replaced-on-deploy"
+database_id = "4726c40d-1fca-4ffb-b2fd-723a3f60048b"
