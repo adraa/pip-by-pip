@@ -28,14 +28,13 @@ npm run setup     # creates the local database, generates codes, loads them
 npm run dev       # http://localhost:41720
 ```
 
-`npm run setup` prints the sign-in codes once. Write them down; only hashes are stored.
+`npm run setup` loads the schema and the hashes in `scripts/seed-learners.sql`. Local sign-in codes (with the default salt) are:
 
-To choose your own codes instead of generated ones:
+- Dheepan: `harbour-lamp-17`
+- Wife: `paper-kite-23`
+- Recovery: `recovery-copper-compass-65`
 
-```bash
-node scripts/make-codes.mjs "Dheepan:harbour-lamp-17" "Wife:paper-kite-23"
-npm run db:seed:local
-```
+To mint different codes, run `node scripts/make-codes.mjs "Name:your-code"` and apply the generated `seed.sql` instead.
 
 Codes are compared case-insensitively and ignore spaces and dashes, so `Harbour Lamp 17` and `harbour-lamp-17` are the
 same code. A third `Recovery` code is always generated as a way back in if a code is forgotten.
