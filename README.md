@@ -55,7 +55,7 @@ npm run deploy
 
 `AUTH_SALT` must match the salt used for the hashes in `scripts/seed-learners.sql` (the local default is `pip-by-pip-dev-salt`). Without those secrets the Worker falls back to development defaults, which is not fine in production.
 
-CI: connect the GitHub repo to Workers Builds. Build command `npm run build`, deploy command `npx wrangler deploy`.
+CI: connect the GitHub repo to Workers Builds. Build command `npm run build`, deploy command `npm run deploy` (builds then uploads `dist/_worker.js/index.js`).
 
 ## How the content is organised
 
