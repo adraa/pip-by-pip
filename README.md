@@ -24,7 +24,7 @@ Requires Node 22 or newer.
 
 ```bash
 npm install
-npm run setup     # creates the local database, generates codes, loads them
+npm run setup     # local D1 schema + learner hashes
 npm run dev       # http://localhost:41720
 ```
 
@@ -37,7 +37,7 @@ npm run dev       # http://localhost:41720
 To mint different codes, run `node scripts/make-codes.mjs "Name:your-code"` and apply the generated `seed.sql` instead.
 
 Codes are compared case-insensitively and ignore spaces and dashes, so `Harbour Lamp 17` and `harbour-lamp-17` are the
-same code. A third `Recovery` code is always generated as a way back in if a code is forgotten.
+same code. A recovery code is included for a way back in if a code is forgotten.
 
 ## Deploying to Cloudflare
 

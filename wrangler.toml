@@ -1,7 +1,8 @@
 name = "pip-by-pip"
 compatibility_date = "2026-08-12"
 compatibility_flags = ["nodejs_compat"]
-main = "dist/_worker.js/index.js"
+# `main` is passed at deploy time (`npm run deploy`) so `astro dev` can start
+# before `dist/_worker.js` exists.
 
 [assets]
 binding = "ASSETS"

@@ -9,7 +9,7 @@
     "dev": "astro dev --host --port 41720",
     "build": "astro build",
     "preview": "wrangler dev --port 41721",
-    "deploy": "astro build && wrangler deploy",
+    "deploy": "astro build && wrangler deploy ./dist/_worker.js/index.js",
     "check": "astro check",
     "codes": "node scripts/make-codes.mjs",
     "db:local": "wrangler d1 execute pip-by-pip --local --file=./schema.sql",
